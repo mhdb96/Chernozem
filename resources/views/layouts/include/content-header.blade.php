@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li>
           <a href="{{ route('dashboard') }}">
-              <i class="fa fa-dashboard"></i> Dashboard
+              <i class="fa fa-dashboard"></i> Kontrol Paneli
             </a>
         </li>
         <li class="active">@yield('breadcrumb-title')</li>

@@ -15,24 +15,17 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Control Panel</li>
+        <li class="header">İşlemler Menüsü</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active">
-            <a href="#">
+        <li class="{{ Request::is('dashboard*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}">
                 <i class="fa fa-dashboard"></i>
-                <span>Dashboard</span>
+                <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li>
-            <a href="{{ route('list') }}">
-                <i class="fa fa-link"></i> 
-                <span>List</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('form') }}">
-                <i class="fa fa-link"></i> 
-                <span>Form</span>
+        <li class="{{ Request::is('soil*') ? 'active' : '' }}">
+            <a href="{{ route('soil.index') }}">
+                <span>Toprak İşlemleri</span>
             </a>
         </li>
 

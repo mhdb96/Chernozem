@@ -12,9 +12,9 @@
 */
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('form', 'DashboardController@form')->name('form');
-Route::get('list', 'DashboardController@list')->name('list');
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('soil', 'SoilController');
