@@ -9,7 +9,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Admin</p>
         </div>
       </div>
 
@@ -26,6 +26,11 @@
         <li class="{{ Request::is('soil*') ? 'active' : '' }}">
             <a href="{{ route('soil.index') }}">
                 <span>Toprak İşlemleri</span>
+            </a>
+        </li>
+        <li class="{{ Request::is('region*') ? 'active' : '' }}">
+            <a href="{{ route('region.index') }}">
+                <span>İklim İşlemleri</span>
             </a>
         </li>
 

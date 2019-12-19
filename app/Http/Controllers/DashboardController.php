@@ -10,12 +10,4 @@ class DashboardController extends Controller
     {
         return \view('dashboard');
     }
-    public function form()
-    {
-        return \view('form');
-    }
-    public function list()
-    {
-        return \view('list');
-    }
 }

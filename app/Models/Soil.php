@@ -11,4 +11,9 @@ class Soil extends Model
     protected $fillable = ['name', 'fertility'];
 
     public $timestamps = false;
+
+    public function regions()
+    {
+        return $this->belongsToMany('App\Models\Region');
+    }
 }

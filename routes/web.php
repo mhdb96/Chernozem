@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('soil', 'SoilController');
+Route::resource('region', 'RegionController');
