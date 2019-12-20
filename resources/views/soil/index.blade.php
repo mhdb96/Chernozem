@@ -38,14 +38,9 @@
                     <a href="{{ route('soil.edit', $item->id)}}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="bottom" title="Düzenle">
                       <i class="fa fa-pencil"></i>
                     </a>
-                    <form action="{{ route('soil.destroy', $item->id)}}" method="POST" style="display: initial">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" onclick="return confirm('Bu fakülteyi silmek istediğinizden emin misiniz?');">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
-                    
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{$item->id}})">
+                      <i class="fa fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               @endforeach
@@ -56,4 +51,46 @@
       </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST" id="deleteForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">UYARI</h4>
+        </div>
+        <div class="modal-body">          
+            @csrf
+            @method('DELETE')
+            <p>Bu toprak türünü silmek istediğinizden emin misiniz?</p>       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Hayır</button>
+          <button type="button" class="btn btn-primary" onclick="formSubmit()">Evet</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 @endsection
+
+@push('scripts')
+  <script type="text/javascript">
+    function deleteData(id)
+    {
+        var id = id;
+        var url = '{{ route("soil.destroy", ":id") }}';
+        url = url.replace(':id', id);
+        $("#deleteForm").attr('action', url);
+    }
+    function formSubmit()
+    {
+        $("#deleteForm").submit();
+    }
+</script>
+@endpush
