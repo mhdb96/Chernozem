@@ -39,6 +39,9 @@ class RegionController extends Controller
     public function create()
     {
         $soils = Soil::all();
+        //dd($soils);
+        if(count($soils) == 0)
+            return redirect()->route('soil.create');
         $my_data = array(
             'title' => 'Iklim',
             'route' => 'region',

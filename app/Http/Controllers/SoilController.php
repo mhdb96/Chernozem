@@ -119,7 +119,14 @@ class SoilController extends Controller
      */
     public function destroy(Soil $soil)
     {
-        $soil->delete();
+        try {
+            $soil->delete();
+        } catch (\Throwable $th) {
+            // TODO - mesaj gönderilecek.
+            // mesaj gönderilecek.
+            return redirect()->route('soil.index');
+        }
+
 
         return redirect()->route('soil.index');
     }

@@ -1,11 +1,11 @@
 <div class="box-body" id="box-body">
     <div class="col-sm-12 input-box">
-        @foreach ($fillables as $fillable)
+        @foreach ($fillables as $key => $fillable)
         @if(is_a($fillable, 'Illuminate\Database\Eloquent\Collection'))
         <div class="form-group">
-        <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillable->first()->getTable()}} Türleri</label>
+        <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
-                  <select class="form-control select2" multiple="multiple" name="{{$fillable->first()->getTable()}}[]" data-placeholder="{{$fillable->first()->getTable()}} Türlerini Seçin" style="width: 100%;">
+                  <select class="form-control select2" multiple="multiple" name="{{$fillable->first()->getTable()}}[]" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
                   @foreach ($fillable as $item)
                       <option value="{{ $item->id }}">{{ $item->name }}</option>
                   @endforeach
@@ -14,12 +14,12 @@
           </div>
         @else
         <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">{{$fillable}}</label>
+            <label for="{{$fillable}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}}</label>
             <div class="col-sm-8">
               <input type="text" class="form-control"
               name="{{$is_multiple ? $fillable.'[]' : $fillable.''}}"
               id="{{$fillable}}"
-              placeholder="{{$title}} Türü {{$fillable}}">
+              placeholder="{{$fillables_titles[$key]}} Giriniz">
             </div>
           </div>
         @endif
