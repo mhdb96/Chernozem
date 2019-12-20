@@ -1,4 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.partial.create.form')
+
+
+{{-- @extends('layouts.master')
 
 @section('title', 'Toprak Türleri')
 
@@ -26,7 +29,7 @@
                 <div class="col-sm-8">
                   <input type="text" class="form-control" name="name[]" id="name" placeholder="Toprak Türü Adı">
                 </div>
-              </div>  
+              </div>
 
               <div class="form-group">
                 <label for="fertility" class="col-sm-2 control-label">Verimlilik</label>
@@ -39,7 +42,7 @@
                     <i class="fa fa-plus"></i> Ekle
                   </button>
                 </div>
-              </div> 
+              </div>
 
             </div>
 
@@ -60,7 +63,7 @@
 
 @push('scripts')
   <script>
-    
+
     $(document).ready(function(){
 
       // Add new element
@@ -88,7 +91,7 @@
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="name[]" id="name" placeholder="Toprak Türü Adı">
               </div>
-            </div>  
+            </div>
 
             <div class="form-group">
               <label for="fertility" class="col-sm-2 control-label">Verimlilik</label>
@@ -100,21 +103,21 @@
                   <i class="fa fa-trash"></i> Kaldır
                 </button>
               </div>
-            </div> 
+            </div>
           `);
         }
       });
 
-      $('.box-body').on('click', '.remove-button', function(){ 
+      $('.box-body').on('click', '.remove-button', function(){
         var id = this.id;
         var split_id = id.split("_");
         var deleteindex = split_id[1];
-        
+
         // Remove <div> with id
         $("#group_" + deleteindex).remove();
 
       });
     });
-    
+
   </script>
-@endpush
+@endpush --}}

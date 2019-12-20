@@ -36,7 +36,14 @@ class SoilController extends Controller
      */
     public function create()
     {
-        return view('soil.create');
+        $my_data = array(
+            'title' => 'Toprak',
+            'route' => 'soil',
+            'fillables' => ['name','fertility'],
+            'fillables_titles' => ['İsim','Verimlilik'],
+            'is_multiple' => true
+        );
+        return view('soil.create')->with($my_data);
     }
 
     /**
@@ -78,7 +85,14 @@ class SoilController extends Controller
      */
     public function edit(Soil $soil)
     {
-        return view('soil.edit', compact('soil'));
+        $my_data = array(
+            'title' => 'Toprak',
+            'route' => 'soil',
+            'fillables' => ['name','fertility'],
+            'fillables_titles' => ['İsim', 'Verimlilik'],
+            'data' => $soil
+        );
+        return view('soil.edit')->with($my_data);
     }
 
     /**

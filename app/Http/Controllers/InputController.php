@@ -36,7 +36,14 @@ class InputController extends Controller
      */
     public function create()
     {
-        return view('input.create');
+        $my_data = array(
+            'title' => 'Giriş',
+            'route' => 'input',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
+            'is_multiple' => true
+        );
+        return view('input.create')->with($my_data);
     }
 
     /**
@@ -74,7 +81,14 @@ class InputController extends Controller
      */
     public function edit(Input $input)
     {
-        return view('input.edit', compact('input'));
+        $my_data = array(
+            'title' => 'Giriş',
+            'route' => 'input',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
+            'data' => $input
+        );
+        return view('input.edit')->with($my_data);
     }
 
     /**

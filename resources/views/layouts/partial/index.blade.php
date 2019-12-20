@@ -1,9 +1,4 @@
-@extends('layouts.master')
-
-@section('title', $title.' Türleri')
-
-@section('breadcrumb-title', $title.' Türleri')
-
+@extends('layouts.partial.container')
 @section('content')
 <section class="content">
     <!-- /.row -->

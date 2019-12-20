@@ -12,6 +12,7 @@ class Region extends Model
 
     public $timestamps = false;
 
+
     public function soils()
     {
         return $this->belongsToMany('App\Models\Soil');
