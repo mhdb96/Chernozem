@@ -1,4 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.partial.index')
+
+{{-- @extends('layouts.master')
 
 @section('title', 'İklim Türleri')
 
@@ -16,9 +18,9 @@
             <div class="box-tools" style="top: 12px">
               <a href="{{ route('region.create') }}" class="btn btn-block btn-success">
                 <i class="fa fa-plus"></i> Yeni Ekle
-              </a> 
+              </a>
             </div>
-            
+
           </div>
           <!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
@@ -43,7 +45,7 @@
                         <i class="fa fa-trash"></i>
                       </button>
                     </form>
-                    
+
                   </td>
                 </tr>
               @endforeach
@@ -54,4 +56,4 @@
       </div>
     </div>
 </section>
-@endsection
+@endsection --}}

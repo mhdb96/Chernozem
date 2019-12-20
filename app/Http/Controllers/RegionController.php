@@ -18,8 +18,17 @@ class RegionController extends Controller
     public function index()
     {
         $regions = Region::all();
+        $my_data = array(
+            'title' => 'İklim',
+            'route' => 'region',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
+            'empty_space' => 1000,
+            'data' => $regions
 
-        return view('region.index', compact('regions'));
+
+        );
+        return view('region.index')->with($my_data);
     }
 
     /**
@@ -41,14 +50,14 @@ class RegionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         // Created new record in regions table
         $region = new Region;
         $region->name = $request->name;
         $region->save();
 
         // Created new record or records in region_soil table (pivot table)
-        $region->soils()->attach($soilIds);
+        $region->soils()->attach($request->soils);
 
         return redirect()->route('region.index');
     }
@@ -75,10 +84,10 @@ class RegionController extends Controller
         $soils = Soil::all();
 
         // Inserted soil ids collected in an array
-        $insertedSoilIds = array();        
+        $insertedSoilIds = array();
         foreach ($region->soils as $soil) {
             array_push($insertedSoilIds, $soil->id);
-        }        
+        }
 
         return view('region.edit', compact('region', 'soils', 'insertedSoilIds'));
     }
@@ -110,6 +119,7 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
+        $region->soils()->detach();
         $region->delete();
 
         return redirect()->route('region.index');
