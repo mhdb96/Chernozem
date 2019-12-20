@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Admin</p>
@@ -23,26 +23,37 @@
                 <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li class="{{ Request::is('soil*') ? 'active' : '' }}">
-            <a href="{{ route('soil.index') }}">
-                <span>Toprak İşlemleri</span>
-            </a>
-        </li>
-        <li class="{{ Request::is('region*') ? 'active' : '' }}">
-            <a href="{{ route('region.index') }}">
-                <span>İklim İşlemleri</span>
-            </a>
-        </li>
-
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+            <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ Request::is('soil*') ? 'active' : '' }}">
+                    <a href="{{ route('soil.index') }}">
+                        <span>Toprak İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('region*') ? 'active' : '' }}">
+                    <a href="{{ route('region.index') }}">
+                        <span>İklim İşlemleri</span>
+                    </a>
+                </li>
+            </ul>
+          </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Kitlerimiz</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li class="{{ Request::is('input*') ? 'active' : '' }}">
+                <a href="{{ route('input.index') }}">
+                    <span>Giriş İşlemleri</span>
+                </a>
+            </li>
           </ul>
         </li>
       </ul>

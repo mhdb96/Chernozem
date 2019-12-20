@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Input;
 
-use App\Models\Soil;
-
-class SoilController extends Controller
+class InputController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +14,19 @@ class SoilController extends Controller
      */
     public function index()
     {
-        $soils = Soil::all();
+        $inputs = Input::all();
+
         $my_data = array(
-            'title' => 'Toprak',
-            'route' => 'soil',
-            'fillables' => ['name', 'fertility'],
-            'fillables_titles' => ['İsim', 'Verimlilik'],
-            'empty_space' => 500,
-            'data' => $soils
+            'title' => 'Giriş',
+            'route' => 'input',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
+            'empty_space' => 1000,
+            'data' => $inputs
 
 
         );
-        return view('soil.index')->with($my_data);
+        return view('input.index')->with($my_data);
     }
 
     /**
@@ -37,13 +37,13 @@ class SoilController extends Controller
     public function create()
     {
         $my_data = array(
-            'title' => 'Toprak',
-            'route' => 'soil',
-            'fillables' => ['name','fertility'],
-            'fillables_titles' => ['İsim','Verimlilik'],
+            'title' => 'Giriş',
+            'route' => 'input',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
             'is_multiple' => true
         );
-        return view('soil.create')->with($my_data);
+        return view('input.create')->with($my_data);
     }
 
     /**
@@ -54,16 +54,12 @@ class SoilController extends Controller
      */
     public function store(Request $request)
     {
-        if(count($request->name) == count($request->fertility)) {
             for ($i=0; $i < count($request->name); $i++) {
-                Soil::create([
+                Input::create([
                     'name'      => $request->name[$i],
-                    'fertility' => $request->fertility[$i],
                 ]);
             }
-        }
-
-        return redirect()->route('soil.index');
+        return redirect()->route('input.index');
     }
 
     /**
@@ -83,16 +79,16 @@ class SoilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Soil $soil)
+    public function edit(Input $input)
     {
         $my_data = array(
-            'title' => 'Toprak',
-            'route' => 'soil',
-            'fillables' => ['name','fertility'],
-            'fillables_titles' => ['İsim', 'Verimlilik'],
-            'data' => $soil
+            'title' => 'Giriş',
+            'route' => 'input',
+            'fillables' => ['name'],
+            'fillables_titles' => ['İsim'],
+            'data' => $input
         );
-        return view('soil.edit')->with($my_data);
+        return view('input.edit')->with($my_data);
     }
 
     /**
@@ -102,13 +98,13 @@ class SoilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Soil $soil)
+    public function update(Request $request, Input $input)
     {
-        $soil->update(
-            $request->only(['name', 'fertility'])
+        $input->update(
+            $request->only(['name'])
         );
 
-        return redirect()->route('soil.index');
+        return redirect()->route('input.index');
     }
 
     /**
@@ -117,17 +113,10 @@ class SoilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Soil $soil)
+    public function destroy(Input $input)
     {
-        try {
-            $soil->delete();
-        } catch (\Throwable $th) {
-            // TODO - mesaj gönderilecek.
-            // mesaj gönderilecek.
-            return redirect()->route('soil.index');
-        }
+        $input->delete();
 
-
-        return redirect()->route('soil.index');
+        return redirect()->route('input.index');
     }
 }

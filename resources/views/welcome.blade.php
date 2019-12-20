@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        
+
     </head>
     <body>
 
@@ -34,7 +34,7 @@
 
             // Get a reference to the database service
             var database = firebase.database();
-            
+
             // var starCountRef = firebase.database().ref('data');
             // starCountRef.on('value', function(snapshot) {
             //     console.log(snapshot.val());
