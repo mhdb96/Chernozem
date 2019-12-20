@@ -1,21 +1,17 @@
 @extends('layouts.partial.container')
 @section('content')
 <section class="content">
-    <!-- /.row -->
     <div class="row">
       <div class="col-xs-12">
         <div class="box box-primary">
           <div class="box-header" style="padding: 20px 10px">
             <h3 class="box-title">{{$title}} Türleri</h3>
-
             <div class="box-tools" style="top: 12px">
               <a href="{{ route($route.'.create') }}" class="btn btn-block btn-success">
                 <i class="fa fa-plus"></i> Yeni Ekle
               </a>
             </div>
-
           </div>
-          <!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tbody><tr>
