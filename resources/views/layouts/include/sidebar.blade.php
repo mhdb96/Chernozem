@@ -23,13 +23,13 @@
                 <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li class="treeview">
+        <li class="treeview {{ Request::is('soil*') || Request::is('region*') ? 'menu-open' : '' }}">
             <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu">
+            <ul class="treeview-menu" style="{{ Request::is('soil*') || Request::is('region*') ? 'display: block' : '' }}">
                 <li class="{{ Request::is('soil*') ? 'active' : '' }}">
                     <a href="{{ route('soil.index') }}">
                         <span>Toprak İşlemleri</span>
@@ -42,13 +42,13 @@
                 </li>
             </ul>
           </li>
-        <li class="treeview">
+        <li class="treeview {{ Request::is('input*') ? 'menu-open' : '' }}">
           <a href="#"><i class="fa fa-link"></i> <span>Kitlerimiz</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
+          <ul class="treeview-menu" style="{{ Request::is('input*') ? 'display: block' : '' }}">
             <li class="{{ Request::is('input*') ? 'active' : '' }}">
                 <a href="{{ route('input.index') }}">
                     <span>Giriş İşlemleri</span>
