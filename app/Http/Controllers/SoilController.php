@@ -8,6 +8,7 @@ use App\Models\Soil;
 
 class SoilController extends Controller
 {
+    private $fillables_types = ['text','text'];
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +42,7 @@ class SoilController extends Controller
             'route' => 'soil',
             'fillables' => ['name','fertility'],
             'fillables_titles' => ['İsim','Verimlilik'],
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => true
         );
         return view('soil.create')->with($my_data);
@@ -90,6 +92,7 @@ class SoilController extends Controller
             'route' => 'soil',
             'fillables' => ['name','fertility'],
             'fillables_titles' => ['İsim', 'Verimlilik'],
+            'fillables_types' => $this->fillables_types,
             'data' => $soil
         );
         return view('soil.edit')->with($my_data);

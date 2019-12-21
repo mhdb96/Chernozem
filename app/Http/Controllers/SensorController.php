@@ -13,6 +13,7 @@ class SensorController extends Controller
     private $title = 'Sensor';
     private $fillables = ['name','description','unit_price'];
     private $fillables_titles = ['Isim','Aciklama','Fiyat'];
+    private $fillables_types = ['text','text','text','many'];
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +48,7 @@ class SensorController extends Controller
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', $inputs],
             'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Girisler'],
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );
         return view($this->route.'.create')->with($my_data);
@@ -98,6 +100,7 @@ class SensorController extends Controller
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', [$inputs, $insertedInputIds]],
             'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Girisler'],
+            'fillables_types' => $this->fillables_types,
             'data' => $sensor
         );
         return view($this->route.'.edit')->with($my_data);

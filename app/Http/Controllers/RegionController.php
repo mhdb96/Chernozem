@@ -10,6 +10,7 @@ use App\Models\RegionSoil;
 
 class RegionController extends Controller
 {
+    private $fillables_types = ['text','many'];
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +48,7 @@ class RegionController extends Controller
             'route' => 'region',
             'fillables' => ['name', $soils],
             'fillables_titles' => ['name','Topraklar'],
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );
         return view('region.create')->with($my_data);
@@ -106,6 +108,7 @@ class RegionController extends Controller
             'route' => 'region',
             'fillables' => ['name',[$soils , $insertedSoilIds]],
             'fillables_titles' => ['İsim', 'Topraklar'],
+            'fillables_types' => $this->fillables_types,
             'data' => $region
         );
         return view('region.edit')->with($my_data);

@@ -11,6 +11,7 @@ class ActionController extends Controller
     private $title = 'Aksiyon';
     private $fillables = ['name'];
     private $fillables_titles = ['Isim'];
+    private $fillables_types = ['text'];
 
     /**
      * Display a listing of the resource.
@@ -43,6 +44,7 @@ class ActionController extends Controller
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => true
         );
         return view($this->route.'.create')->with($my_data);
@@ -88,6 +90,7 @@ class ActionController extends Controller
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
+            'fillables_types' => $this->fillables_types,
             'data' => $action
         );
         return view($this->route.'.edit')->with($my_data);

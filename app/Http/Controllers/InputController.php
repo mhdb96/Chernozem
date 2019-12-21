@@ -7,6 +7,7 @@ use App\Models\Input;
 
 class InputController extends Controller
 {
+    private $fillables_types = ['text'];
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +42,7 @@ class InputController extends Controller
             'route' => 'input',
             'fillables' => ['name'],
             'fillables_titles' => ['İsim'],
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => true
         );
         return view('input.create')->with($my_data);
@@ -86,6 +88,7 @@ class InputController extends Controller
             'route' => 'input',
             'fillables' => ['name'],
             'fillables_titles' => ['İsim'],
+            'fillables_types' => $this->fillables_types,
             'data' => $input
         );
         return view('input.edit')->with($my_data);

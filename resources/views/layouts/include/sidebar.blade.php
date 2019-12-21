@@ -40,6 +40,21 @@
                         <span>İklim İşlemleri</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('plant*') ? 'active' : '' }}">
+                    <a href="{{ route('plant.index') }}">
+                        <span>Bitki İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('area*') ? 'active' : '' }}">
+                    <a href="{{ route('area.index') }}">
+                        <span>Saha İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('area-capacity*') ? 'active' : '' }}">
+                    <a href="{{ route('area-capacity.index') }}">
+                        <span>Saha Kapasite İşlemleri</span>
+                    </a>
+                </li>
             </ul>
           </li>
         <li class="treeview {{ Request::is('input*') ? 'menu-open' : '' }}">
@@ -49,6 +64,11 @@
               </span>
           </a>
           <ul class="treeview-menu" style="{{ Request::is('input*') ? 'display: block' : '' }}">
+            <li class="{{ Request::is('kit*') ? 'active' : '' }}">
+                <a href="{{ route('kit.index') }}">
+                    <span>Kit İşlemleri</span>
+                </a>
+            </li>
             <li class="{{ Request::is('input*') ? 'active' : '' }}">
                 <a href="{{ route('input.index') }}">
                     <span>Giriş İşlemleri</span>
@@ -76,6 +96,30 @@
             </li>
           </ul>
         </li>
+        <li class="treeview {{ Request::is('soil*') || Request::is('region*') ? 'menu-open' : '' }}">
+            <a href="#"><i class="fa fa-link"></i> <span>Diger</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="{{ Request::is('soil*') || Request::is('region*') ? 'display: block' : '' }}">
+                <li class="{{ Request::is('category*') ? 'active' : '' }}">
+                    <a href="{{ route('category.index') }}">
+                        <span>Kategori İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('type*') ? 'active' : '' }}">
+                    <a href="{{ route('type.index') }}">
+                        <span>Tip İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('unit*') ? 'active' : '' }}">
+                    <a href="{{ route('unit.index') }}">
+                        <span>Unite İşlemleri</span>
+                    </a>
+                </li>
+            </ul>
+          </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

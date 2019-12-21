@@ -11,6 +11,7 @@ class MyControllersController extends Controller
     private $title = 'Kontrolor';
     private $fillables = ['name','description','unit_price'];
     private $fillables_titles = ['Isim','Aciklama','Fiyat'];
+    private $fillables_types = ['text','text','text'];
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +43,7 @@ class MyControllersController extends Controller
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
+            'fillables_types' => $this->fillables_types,
             'is_multiple' => true
         );
         return view($this->route.'.create')->with($my_data);
@@ -92,6 +94,7 @@ class MyControllersController extends Controller
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
+            'fillables_types' => $this->fillables_types,
             'data' => $controller
         );
         return view($this->route.'.edit')->with($my_data);

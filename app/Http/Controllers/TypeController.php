@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Actuator;
-use App\Models\Action;
 
-class ActuatorController extends Controller
+use App\Models\Type;
+use App\Models\Category;
+
+class TypeController extends Controller
 {
-    private $route = 'actuator';
-    private $title = 'Eyleyici';
-    private $fillables = ['name','description','unit_price'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text','many'];
+    private $route = 'type';
+    private $title = 'tip';
+    private $fillables = ['name'];
+    private $fillables_titles = ['Isim'];
+    private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
      *
@@ -20,14 +21,14 @@ class ActuatorController extends Controller
      */
     public function index()
     {
-        $actuators = Actuator::all();
+        $types = Type::all();
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
-            'empty_space' => 500,
-            'data' => $actuators
+            'empty_space' => 1000,
+            'data' => $types
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -39,17 +40,18 @@ class ActuatorController extends Controller
      */
     public function create()
     {
-        $actions = Action::all();
-        if(count($actions) == 0)
-            return redirect()->route('action.create');
+
+        $categories = Category::all();        
+        if(count($categories) == 0)
+            return redirect()->route('category.create');
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['name','description','unit_price', $actions],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Eyleyiciler'],
+            'fillables' => ['name', $categories],
+            'fillables_titles' => ['Isim','Kategoriler'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
-        );
+        );        
         return view($this->route.'.create')->with($my_data);
     }
 
@@ -61,12 +63,10 @@ class ActuatorController extends Controller
      */
     public function store(Request $request)
     {
-        $actuator = new Actuator;
-        $actuator->name = $request->name;
-        $actuator->description = $request->description;
-        $actuator->unit_price = $request->unit_price;
-        $actuator->save();
-        $actuator->actions()->attach($request->actions);
+        $type = new Type;
+        $type->name = $request->name;        
+        $type->category()->associate($request->categories);     
+        $type->save();                         
         return redirect()->route($this->route.'.index');
     }
 
@@ -87,20 +87,18 @@ class ActuatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Actuator $actuator)
+    public function edit(Type $type)
     {
-        $actions = Action::all();
-        $insertedActionIds = array();
-        foreach ($actuator->actions as $action) {
-            array_push($insertedActionIds, $action->id);
-        }
+        $categories = Category::all();
+        $insertedCategoryIds = array();                            
+        array_push($insertedCategoryIds, $type->category->id);
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['name','description','unit_price', [$actions, $insertedActionIds]],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Eyleyiciler'],
-            'fillables_types' => $this->fillables_types,
-            'data' => $actuator
+            'fillables' => ['name',[$categories, $insertedCategoryIds] ],
+            'fillables_titles' => ['Isim','Kategoriler'],  
+            'fillables_types' => $this->fillables_types,          
+            'data' => $type
         );
         return view($this->route.'.edit')->with($my_data);
     }
@@ -112,14 +110,11 @@ class ActuatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Actuator $actuator)
+    public function update(Request $request, Type $type)
     {
-        $actuator->name = $request->name;
-        $actuator->description = $request->description;
-        $actuator->unit_price = $request->unit_price;
-        $actuator->save();
-        $actuator->actions()->sync($request->actions);
-
+        $type->name = $request->name;        
+        $type->category()->associate($request->categories);          
+        $type->save();        
         return redirect()->route($this->route.'.index');
     }
 
@@ -129,10 +124,9 @@ class ActuatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Actuator $actuator)
+    public function destroy(Type $type)
     {
-        $actuator->actions()->detach();
-        $actuator->delete();
+        $type->delete();
         return redirect()->route($this->route.'.index');
     }
 }
