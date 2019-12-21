@@ -54,6 +54,26 @@
                     <span>Giriş İşlemleri</span>
                 </a>
             </li>
+            <li class="{{ Request::is('action*') ? 'active' : '' }}">
+                <a href="{{ route('action.index') }}">
+                    <span>Aksiyon İşlemleri</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('sensor*') ? 'active' : '' }}">
+                <a href="{{ route('sensor.index') }}">
+                    <span>Sensor İşlemleri</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('actuator*') ? 'active' : '' }}">
+                <a href="{{ route('actuator.index') }}">
+                    <span>Eyleyici İşlemleri</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('controller*') ? 'active' : '' }}">
+                <a href="{{ route('controller.index') }}">
+                    <span>Kontrolor İşlemleri</span>
+                </a>
+            </li>
           </ul>
         </li>
       </ul>

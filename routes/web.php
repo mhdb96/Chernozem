@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::resource('soil', 'SoilController');
 Route::resource('region', 'RegionController');
 Route::resource('input', 'InputController');
+Route::resource('action', 'ActionController');
+Route::resource('sensor', 'SensorController');
+Route::resource('actuator', 'ActuatorController');
+Route::resource('controller', 'MyControllersController');

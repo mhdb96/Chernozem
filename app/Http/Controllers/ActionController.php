@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Input;
+use App\Models\Action;
 
-class InputController extends Controller
+class ActionController extends Controller
 {
+    private $route = 'action';
+    private $title = 'Aksiyon';
+    private $fillables = ['name'];
+    private $fillables_titles = ['Isim'];
+
     /**
      * Display a listing of the resource.
      *
@@ -14,19 +19,16 @@ class InputController extends Controller
      */
     public function index()
     {
-        $inputs = Input::all();
-
+        $actions = Action::all();
         $my_data = array(
-            'title' => 'Giriş',
-            'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'title' => $this->title,
+            'route' => $this->route,
+            'fillables' => $this->fillables,
+            'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $inputs
-
-
+            'data' => $actions
         );
-        return view('input.index')->with($my_data);
+        return view($this->route.'.index')->with($my_data);
     }
 
     /**
@@ -37,13 +39,13 @@ class InputController extends Controller
     public function create()
     {
         $my_data = array(
-            'title' => 'Giriş',
-            'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'title' => $this->title,
+            'route' => $this->route,
+            'fillables' => $this->fillables,
+            'fillables_titles' => $this->fillables_titles,
             'is_multiple' => true
         );
-        return view('input.create')->with($my_data);
+        return view($this->route.'.create')->with($my_data);
     }
 
     /**
@@ -54,12 +56,12 @@ class InputController extends Controller
      */
     public function store(Request $request)
     {
-            for ($i=0; $i < count($request->name); $i++) {
-                Input::create([
-                    'name'      => $request->name[$i],
-                ]);
-            }
-        return redirect()->route('input.index');
+        for ($i=0; $i < count($request->name); $i++) {
+            Action::create([
+                'name'      => $request->name[$i],
+            ]);
+        }
+    return redirect()->route($this->route.'.index');
     }
 
     /**
@@ -79,16 +81,16 @@ class InputController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Input $input)
+    public function edit(Action $action)
     {
         $my_data = array(
-            'title' => 'Giriş',
-            'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
-            'data' => $input
+            'title' => $this->title,
+            'route' => $this->route,
+            'fillables' => $this->fillables,
+            'fillables_titles' => $this->fillables_titles,
+            'data' => $action
         );
-        return view('input.edit')->with($my_data);
+        return view($this->route.'.edit')->with($my_data);
     }
 
     /**
@@ -98,13 +100,13 @@ class InputController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Input $input)
+    public function update(Request $request, Action $action)
     {
-        $input->update(
+        $action->update(
             $request->only(['name'])
         );
 
-        return redirect()->route('input.index');
+        return redirect()->route($this->route.'.index');
     }
 
     /**
@@ -113,15 +115,15 @@ class InputController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Input $input)
+    public function destroy(Action $action)
     {
         try {
-            $input->delete();
+            $action->delete();
         } catch (\Throwable $th) {
             // TODO - mesaj gönderilecek.
             // mesaj gönderilecek.
-            return redirect()->route('input.index');
+            return redirect()->route($this->route.'.index');
         }
-        return redirect()->route('input.index');
+        return redirect()->route($this->route.'.index');
     }
 }
