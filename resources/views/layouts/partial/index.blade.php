@@ -17,7 +17,7 @@
               <tbody><tr>
                 <th style="width: 35px">#</th>
                 @foreach ($fillables_titles as $fillable)
-                <th style="width: 100px">{{$fillable}}</th>
+                <th style="width: 200px">{{$fillable}}</th>
                 @endforeach
               <th style="width: {{$empty_space}}px;"></th>
               </tr>
