@@ -23,13 +23,15 @@
                 <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li class="treeview {{ Request::is('soil*') || Request::is('region*') ? 'menu-open' : '' }}">
+        <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') ? 'menu-open' : '' }}">
             <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu" style="{{ Request::is('soil*') || Request::is('region*') ? 'display: block' : '' }}">
+            <ul 
+                class="treeview-menu" 
+                style="{{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area') || Request::is('area/*') ||  Request::is('area-capacity*') ? 'display: block' : '' }}">
                 <li class="{{ Request::is('packet*') ? 'active' : '' }}">
                     <a href="{{ route('packet.index') }}">
                         <span>Paket İşlemleri</span>
@@ -50,7 +52,7 @@
                         <span>Bitki İşlemleri</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('area*') ? 'active' : '' }}">
+                <li class="{{ Request::is('area*') && !Request::is('area-*') ? 'active' : '' }}">
                     <a href="{{ route('area.index') }}">
                         <span>Saha İşlemleri</span>
                     </a>
@@ -62,13 +64,13 @@
                 </li>
             </ul>
           </li>
-        <li class="treeview {{ Request::is('input*') ? 'menu-open' : '' }}">
+        <li class="treeview {{ Request::is('kit*') || Request::is('input*') || Request::is('action*') || Request::is('sensor*') || Request::is('actuator*') || Request::is('controller*') ? 'menu-open' : '' }}">
           <a href="#"><i class="fa fa-link"></i> <span>Kitlerimiz</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu" style="{{ Request::is('input*') ? 'display: block' : '' }}">
+          <ul class="treeview-menu" style="{{ Request::is('kit*') || Request::is('input*') || Request::is('action*') || Request::is('sensor*') || Request::is('actuator*') || Request::is('controller*') ? 'display: block' : '' }}">
             <li class="{{ Request::is('kit*') ? 'active' : '' }}">
                 <a href="{{ route('kit.index') }}">
                     <span>Kit İşlemleri</span>
@@ -101,13 +103,13 @@
             </li>
           </ul>
         </li>
-        <li class="treeview {{ Request::is('soil*') || Request::is('region*') ? 'menu-open' : '' }}">
+        <li class="treeview {{ Request::is('category*') || Request::is('type*') || Request::is('unit*') ? 'menu-open' : '' }}">
             <a href="#"><i class="fa fa-link"></i> <span>Diger</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu" style="{{ Request::is('soil*') || Request::is('region*') ? 'display: block' : '' }}">
+            <ul class="treeview-menu" style="{{ Request::is('category*') || Request::is('type*') || Request::is('unit*') ? 'display: block' : '' }}">
                 <li class="{{ Request::is('category*') ? 'active' : '' }}">
                     <a href="{{ route('category.index') }}">
                         <span>Kategori İşlemleri</span>

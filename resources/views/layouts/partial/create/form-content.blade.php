@@ -1,7 +1,6 @@
 <div class="box-body" id="box-body">
-    <div class="col-sm-12 input-box">
-        @foreach ($fillables as $key => $fillable)
-        {{-- @if(is_a($fillable, 'Illuminate\Database\Eloquent\Collection')) --}}
+    <div class="col-sm-12 input-box">      
+        @foreach ($fillables as $key => $fillable)        
         <div class="form-group">
             @if($fillables_types[$key] == 'many')            
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
@@ -9,6 +8,7 @@
                   <select class="form-control select2" 
                   multiple="multiple" name="{{$fillable->first()->getTable()}}[]" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
                   @foreach ($fillable as $item)
+                  
                       <option value="{{ $item->id }}">{{ $item->name()}}</option>
                   @endforeach
                   </select>
@@ -17,21 +17,20 @@
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
                   <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
-                    <option></option>
-                    @foreach ($fillable as $item)
+                    <option></option>                    
+                    @foreach ($fillable as $item)                    
                       <option value="{{ $item->id }}">{{ $item->name() }}</option>
                   @endforeach
                   </select>
             </div>
-            @elseif($fillables_types[$key] == 'auto')
-            {{-- {{dd($fillable)}} --}}
+            @elseif($fillables_types[$key] == 'auto')            
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
                   <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
                     <option></option>
-                    @foreach ($fillable as $item)
-                      <option value="{{ $item->id }}">{{ $item->name() }}</option>
-                  @endforeach
+                    {{-- @foreach ($fillable as $item)                    
+                      <option value="{{ $item->id }}">d</option>
+                  @endforeach --}}
                   </select>
             </div>
             @else 
