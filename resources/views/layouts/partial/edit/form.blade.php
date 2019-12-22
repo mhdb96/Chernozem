@@ -27,6 +27,25 @@
       </div>
     </div>
 </section>
+
+<div class="modal fade" id="showDeleteMessage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">UYARI</h4>
+      </div>
+      <div class="modal-body">
+          <p>Bu bilgiyi silemezsiniz.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Tamam</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 @push('scripts')
 <script>

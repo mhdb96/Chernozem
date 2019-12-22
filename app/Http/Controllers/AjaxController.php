@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Region;
-use App\Models\Soil;
+use App\Models\RegionSoil;
+use App\Models\SoilPlant;
 
 class AjaxController extends Controller
 {
-    public static function formatData($data) 
+    public function formatData($data) 
     {
         $formattedData = [];
         foreach ($data as $item) {
@@ -30,7 +30,7 @@ class AjaxController extends Controller
             ->where('region_soil.region_id', $request->regionId)
             ->get();
 
-        return self::formatData($regionSoils);
+        return $this->formatData($regionSoils);
     }
 
     public function getSoilPlants(Request $request)
@@ -41,7 +41,7 @@ class AjaxController extends Controller
             ->where('soil_plant.region_soil_id', $request->regionSoilId)
             ->get();
 
-        return self::formatData($soilPlants);
+        return $this->formatData($soilPlants);
     }
 
     public function getAreas(Request $request)
@@ -55,6 +55,28 @@ class AjaxController extends Controller
             ])
             ->get();
 
-        return self::formatData($areas);
+        return $this->formatData($areas);        
+    }
+
+    public function controlData(Request $request)
+    {   
+        $controlData = [];
+        if(!empty($request->region_id) && !empty($request->soilIds)) {
+
+            foreach ($request->soilIds as $soil_id) {
+                $regionSoil = RegionSoil::where([
+                    ['region_id', $request->region_id],
+                    ['soil_id', $soil_id],
+                ])->get()->first();
+                
+                $soilPlants = SoilPlant::where('region_soil_id', $regionSoil->id)->get();
+
+                if(count($soilPlants) > 0) 
+                    $controlData[] = ['isOpen' => true, 'soil_id' => $soil_id];
+                else 
+                    $controlData[] = ['isOpen' => false, 'soil_id' => $soil_id];
+            }
+        }
+        return \Response::json($controlData);
     }
 }
