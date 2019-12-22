@@ -1,9 +1,9 @@
 <div class="box-body" id="box-body">
     <div class="col-sm-12 input-box">
         @foreach ($fillables as $key => $fillable)
-        @if(is_a($fillable, 'Illuminate\Database\Eloquent\Collection'))
+        {{-- @if(is_a($fillable, 'Illuminate\Database\Eloquent\Collection')) --}}
         <div class="form-group">
-            @if($fillables_types[$key] == 'many')
+            @if($fillables_types[$key] == 'many')            
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
                   <select class="form-control select2" 
@@ -13,7 +13,7 @@
                   @endforeach
                   </select>
             </div>
-            @elseif($fillables_types[$key] == 'one')
+            @elseif($fillables_types[$key] == 'one')           
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
                   <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
@@ -24,6 +24,7 @@
                   </select>
             </div>
             @elseif($fillables_types[$key] == 'auto')
+            {{-- {{dd($fillable)}} --}}
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
                   <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
@@ -33,10 +34,7 @@
                   @endforeach
                   </select>
             </div>
-            @endif
-        </div>
-        @else
-        <div class="form-group">
+            @else 
             <label for="{{$fillable}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}}</label>
             <div class="col-sm-8">
               <input type="text" class="form-control"
@@ -44,8 +42,8 @@
               id="{{$fillable}}"
               placeholder="{{$fillables_titles[$key]}} Giriniz">
             </div>
-          </div>
-        @endif
+            @endif
+        </div>        
         @endforeach
         @if($is_multiple)
             <div class="form-group">
