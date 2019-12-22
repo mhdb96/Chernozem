@@ -25,4 +25,8 @@ class Unit extends Model
     {
         return $this->belongsTo('App\Models\Type');
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }

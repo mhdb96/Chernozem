@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Plant extends Model
+class Packet extends Model
 {
-    protected $table = 'plants';
+    protected $table = 'packets';
 
-    protected $fillable = ['name', 'unit_price'];
+    protected $fillable = ['name'];
 
     public $timestamps = false;
 
@@ -21,19 +21,14 @@ class Plant extends Model
     // {
     //     return $this->belongsToMany('App\Models\Actuator', 'kit_actuator');
     // }
-    public function type()
+    public function soilPlant()
     {
-        return $this->belongsTo('App\Models\Type');
+        return $this->belongsTo('App\Models\SoilPlant');
     }
 
-    public function unit()
+    public function area()
     {
-        return $this->belongsTo('App\Models\Unit');
-    }
-
-    public function regionSoils()
-    {
-        return $this->belongsToMany('App\Models\RegionSoil','soil_plant');
+        return $this->belongsTo('App\Models\Area');
     }
 
     public function name()

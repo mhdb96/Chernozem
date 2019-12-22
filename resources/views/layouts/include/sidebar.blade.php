@@ -30,6 +30,11 @@
                 </span>
             </a>
             <ul class="treeview-menu" style="{{ Request::is('soil*') || Request::is('region*') ? 'display: block' : '' }}">
+                <li class="{{ Request::is('packet*') ? 'active' : '' }}">
+                    <a href="{{ route('packet.index') }}">
+                        <span>Paket İşlemleri</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('soil*') ? 'active' : '' }}">
                     <a href="{{ route('soil.index') }}">
                         <span>Toprak İşlemleri</span>

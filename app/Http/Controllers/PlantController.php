@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Plant;
 use App\Models\Unit;
 use App\Models\Type;
+use App\Models\RegionSoil;
+use App\Models\SoilPlant;
+
 
 
 class PlantController extends Controller
@@ -15,7 +18,7 @@ class PlantController extends Controller
     private $title = 'Bitki';
     private $fillables = ['name','unit_price'];
     private $fillables_titles = ['Isim','Fiyat'];
-    private $fillables_types = ['text','text','one','one'];
+    private $fillables_types = ['text','text','one','one','many'];
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +45,7 @@ class PlantController extends Controller
      */
     public function create()
     {
+        $regionSoils = RegionSoil::all();
         $types = Type::all();        
         $units = Unit::all();        
         if(count($types) == 0)
@@ -51,8 +55,8 @@ class PlantController extends Controller
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['name','unit_price' ,$types, $units],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Unite'],
+            'fillables' => ['name','unit_price' ,$types, $units, $regionSoils],
+            'fillables_titles' => ['Isim','Fiyat','Tipler','Unite','Iklim Topraklari'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -71,8 +75,9 @@ class PlantController extends Controller
         $plant->name = $request->name;        
         $plant->unit_price = $request->unit_price;        
         $plant->type()->associate($request->types); 
-        $plant->unit()->associate($request->units);         
-        $plant->save();                         
+        $plant->unit()->associate($request->units);                 
+        $plant->save();   
+        $plant->regionSoils()->attach($request->region_soil);                     
         return redirect()->route($this->route.'.index');
     }
 
@@ -98,17 +103,21 @@ class PlantController extends Controller
         $types = Type::all();
         $insertedTypesIds = array();                            
         array_push($insertedTypesIds, $plant->type->id);
-
         $units = Unit::all();
         $insertedUnitIds = array();                            
         array_push($insertedUnitIds, $plant->unit->id);
+        $regionSoils = RegionSoil::all();
+        $insertedRegionSoilIds = array();
+        foreach ($plant->regionSoils as $regionSoil) {
+            array_push($insertedRegionSoilIds, $regionSoil->id);
+        }
 
 
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['name','unit_price',[$types, $insertedTypesIds], [$units, $insertedUnitIds] ],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Uniteler'],  
+            'fillables' => ['name','unit_price',[$types, $insertedTypesIds], [$units, $insertedUnitIds], [$regionSoils, $insertedRegionSoilIds] ],
+            'fillables_titles' => ['Isim','Fiyat','Tipler','Uniteler','Iklim Topraklari'],  
             'fillables_types' => $this->fillables_types,          
             'data' => $plant
         );
@@ -128,7 +137,8 @@ class PlantController extends Controller
         $plant->unit_price = $request->unit_price;
         $plant->type()->associate($request->types);          
         $plant->unit()->associate($request->units);
-        $plant->save();        
+        $plant->save();  
+        $plant->regionSoils()->sync($request->region_soil);      
         return redirect()->route($this->route.'.index');
     }
 
@@ -140,6 +150,7 @@ class PlantController extends Controller
      */
     public function destroy(Plant $plant)
     {
+        $plant->regionSoils()->detach();
         $plant->delete();
         return redirect()->route($this->route.'.index');
     }

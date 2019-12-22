@@ -31,3 +31,4 @@ Route::resource('unit', 'UnitController');
 Route::resource('plant', 'PlantController');
 Route::resource('area', 'AreaController');
 Route::resource('area-capacity', 'AreaCapacityController');
+Route::resource('packet', 'PacketController');

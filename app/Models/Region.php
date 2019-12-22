@@ -17,4 +17,8 @@ class Region extends Model
     {
         return $this->belongsToMany('App\Models\Soil');
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }

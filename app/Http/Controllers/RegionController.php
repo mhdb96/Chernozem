@@ -17,8 +17,7 @@ class RegionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-
+    {        
         $regions = Region::all();
         $my_data = array(
             'title' => 'İklim',

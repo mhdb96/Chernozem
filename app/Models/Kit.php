@@ -25,4 +25,8 @@ class Kit extends Model
     {
         return $this->belongsTo('App\Models\MyController', 'controller_id');
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }

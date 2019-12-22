@@ -30,4 +30,8 @@ class Area extends Model
     {
         return $this->belongsTo('App\Models\Unit');
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }

@@ -17,4 +17,8 @@ class MyController extends Model
     // {
     //     return $this->belongsToMany('App\Models\Input');
     // }
+    public function name()
+    {
+        return $this->name;
+    }
 }

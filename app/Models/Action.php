@@ -16,4 +16,8 @@ class Action extends Model
     // {
     //     return $this->belongsToMany('App\Models\Region');
     // }
+    public function name()
+    {
+        return $this->name;
+    }
 }

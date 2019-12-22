@@ -25,4 +25,8 @@ class Type extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
+    public function name()
+    {
+        return $this->name;
+    }
 }
