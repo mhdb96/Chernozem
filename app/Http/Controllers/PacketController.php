@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Packet;
 use App\Models\Soil;
@@ -12,6 +13,8 @@ use App\Models\Plant;
 use App\Models\RegionSoil;
 use App\Models\SoilPlant;
 use App\Models\AreaCapacity;
+use App\Models\Kit;
+
 
 class PacketController extends Controller
 {
@@ -19,7 +22,7 @@ class PacketController extends Controller
     private $title = 'Paket';
     private $fillables = ['name'];
     private $fillables_titles = ['Isim'];
-    private $fillables_types = ['text','one','auto','auto','one'];
+    private $fillables_types = ['text','one','auto','auto','auto'];
     //['Isim','Iklimler','Topraklar','Bitkiler','Sahalar'
     /**
      * Display a listing of the resource.
@@ -34,7 +37,7 @@ class PacketController extends Controller
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
-            'empty_space' => 1000,
+            'empty_space' => 400,
             'data' => $packets
         );
         return view($this->route.'.index')->with($my_data);
@@ -47,12 +50,15 @@ class PacketController extends Controller
      */
     public function create()
     {
+
         $regions = Region::all();        
         if(count($regions) == 0)
             return redirect()->route('region.create');
-        $areas = Area::all();
-        if(count($areas) == 0)
-            return redirect()->route('area.create');
+        // $kits = Kit::all();        
+        // if(count($kits) == 0)
+        //     return redirect()->route('kit.create');
+        $areas = collect();        
+        $areas->add(new Area);
 
         $regionSoil = collect();        
         $regionSoil->add(new RegionSoil);
@@ -77,8 +83,14 @@ class PacketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {       
+        $packet = new Packet;
+        $packet->name = $request->name;              
+        $packet->area()->associate($request->areas); 
+        $packet->soilPlant()->associate($request->soil_plant);                 
+        $packet->save();   
+        // $packet->kits()->attach($request->kits);                     
+        return redirect()->route($this->route.'.index');
     }
 
     /**
@@ -98,9 +110,50 @@ class PacketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Packet $packet)
     {
-        //
+        //TODO - Enable Validation!!!!!!!!!!!!!!!!!!!!!
+        $data = DB::table('soil_plant')
+            ->join('plants', 'plants.id', '=', 'soil_plant.plant_id')
+            ->join('region_soil', 'region_soil.id', '=', 'soil_plant.region_soil_id')
+            ->join('soils', 'soils.id', '=', 'region_soil.soil_id')
+            ->join('regions', 'regions.id', '=', 'region_soil.region_id')
+            ->join('packets', 'packets.soil_plant_id', '=', 'soil_plant.id')
+            ->select('regions.id as region_id', 'soils.id as soil_id', 'plants.id as plant_id')
+            ->where('packets.id',$packet->id)
+            ->get()->first;        
+        $regions = Region::all();
+        $insertedRegionIds = array(); 
+        array_push($insertedRegionIds, $data->plant_id->region_id);        
+        $soils = collect();
+        $soils->add(Soil::find($data->plant_id->soil_id));                    
+        $insertedsoilIds = array();                            
+        array_push($insertedsoilIds, $data->plant_id->soil_id);        
+        $plants = collect();
+        $plants->add(Plant::find($data->plant_id->plant_id)); 
+        $insertedPlantIds = array();                            
+        array_push($insertedPlantIds, $packet->soilPlant->id);
+        $areas = collect();
+        $getAreas = Area::where('area_capacity.plant_id', $data->plant_id->plant_id)
+        ->join('area_capacity', 'area_capacity.area_id', '=', 'areas.id')->get();        
+        if(count($getAreas) > 1)
+        {
+            $areas = $getAreas;
+        }
+        else {
+            $areas->add($getAreas);
+        }        
+        $insertedAreaIds = array();                            
+        array_push($insertedAreaIds, $packet->area->id);
+        $my_data = array(
+            'title' => $this->title,
+            'route' => $this->route,
+            'fillables' => ['name',[$regions, $insertedRegionIds], [$soils, $insertedsoilIds], [$plants, $insertedPlantIds],  [$areas, $insertedAreaIds]],
+            'fillables_titles' => ['Isim','Iklimler','Topraklar','Bitkiler','Sahalar'],  
+            'fillables_types' => $this->fillables_types,          
+            'data' => $packet
+        );        
+        return view($this->route.'.edit')->with($my_data);
     }
 
     /**
@@ -110,9 +163,14 @@ class PacketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Packet $packet)
+    {        
+        $packet->name = $request->name;              
+        $packet->area()->associate($request->areas);
+        $packet->soilPlant()->associate($request->plants);                 
+        $packet->save();   
+        // $packet->kits()->attach($request->kits);                     
+        return redirect()->route($this->route.'.index');
     }
 
     /**
@@ -121,8 +179,9 @@ class PacketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Packet $packet)
     {
-        //
+        $packet->delete();
+        return redirect()->route($this->route.'.index');
     }
 }

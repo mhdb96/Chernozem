@@ -27,34 +27,33 @@ class AjaxController extends Controller
         $regionSoils = DB::table('region_soil')
             ->select('region_soil.id', 'soils.name')
             ->join('soils', 'soils.id', '=', 'region_soil.soil_id')
-            ->where('region_soil.region_id', $request->regionId)
+            ->where('region_soil.region_id', $request->id)
             ->get();
 
         return self::formatData($regionSoils);
     }
 
     public function getSoilPlants(Request $request)
-    {        
+    {         
         $soilPlants = DB::table('soil_plant')
-            ->select('plants.id', 'plants.name')
+            ->select('soil_plant.id', 'plants.name')
             ->join('plants', 'plants.id', '=', 'soil_plant.plant_id')
-            ->where('soil_plant.region_soil_id', $request->regionSoilId)
+            ->where('soil_plant.region_soil_id', $request->id)
             ->get();
-
         return self::formatData($soilPlants);
     }
 
     public function getAreas(Request $request)
-    {        
+    {   
+        $soildPlant = DB::table('soil_plant')->where('id', $request->id )->select('plant_id')->get()->first();
         $areas = DB::table('area_capacity')
             ->select('areas.id', 'areas.name')
             ->join('areas', 'areas.id', '=', 'area_capacity.area_id')
             ->where([
-                ['area_capacity.plant_id', '=', $request->plantId],
+                ['area_capacity.plant_id', '=', $soildPlant->plant_id],
                 ['area_capacity.capacity', '<>', ''],
             ])
             ->get();
-
         return self::formatData($areas);
     }
 }

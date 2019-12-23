@@ -31,6 +31,11 @@ class Packet extends Model
         return $this->belongsTo('App\Models\Area');
     }
 
+    public function kits()
+    {
+        return $this->belongsToMany('App\Models\Kit','packet_kit');
+    }
+
     public function name()
     {
         return $this->name;
