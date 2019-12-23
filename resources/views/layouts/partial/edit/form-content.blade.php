@@ -6,7 +6,7 @@
         <div class="col-sm-8">
           <select class="form-control select2" multiple="multiple" name="{{$fillable[0]->first()->getTable()}}[]" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;">
             @foreach ($fillable[0] as $item)
-              <option value="{{ $item->id }}" {{ in_array($item->id, $fillable[1]) ? 'selected' : '' }}>{{ $item->name() }}</option>
+              <option value="{{ $item->id }}" {{ in_array($item->id, $fillable[1]) ? 'selected' : '' }} on>{{ $item->name() }}</option>
             @endforeach
           </select>
         </div>
