@@ -23,7 +23,7 @@
                 <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') ? 'menu-open' : '' }}">
+        <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') || Request::is('packet-kit*') ? 'menu-open' : '' }}">
             <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -32,9 +32,14 @@
             <ul 
                 class="treeview-menu" 
                 style="{{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area') || Request::is('area/*') ||  Request::is('area-capacity*') ? 'display: block' : '' }}">
-                <li class="{{ Request::is('packet*') ? 'active' : '' }}">
+                <li class="{{ Request::is('packet*') && !Request::is('packet-*') ? 'active' : '' }}">
                     <a href="{{ route('packet.index') }}">
                         <span>Paket İşlemleri</span>
+                    </a>
+                </li>
+                <li class="{{ Request::is('packet-kit*') ? 'active' : '' }}">
+                    <a href="{{ route('packet-kit.index') }}">
+                        <span>Paketlere Kit Ekle</span>
                     </a>
                 </li>
                 <li class="{{ Request::is('soil*') ? 'active' : '' }}">

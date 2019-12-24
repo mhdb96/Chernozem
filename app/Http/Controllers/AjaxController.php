@@ -80,4 +80,14 @@ class AjaxController extends Controller
         }
         return \Response::json($controlData);
     }
+
+    public function getPacketKitCount(Request $request)
+    {   
+        $selectedKitCount = DB::table('packet_kit')->where([
+            ['packet_id', '=', $request->packet_id],
+            ['kit_id', '=', $request->kit_id]
+        ])->select('count')->first();
+
+        return \Response::json($selectedKitCount);
+    }
 }

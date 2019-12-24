@@ -32,9 +32,11 @@ Route::resource('plant', 'PlantController');
 Route::resource('area', 'AreaController');
 Route::resource('area-capacity', 'AreaCapacityController');
 Route::resource('packet', 'PacketController');
+Route::resource('packet-kit', 'PacketKitController');
 
 Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
 Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
 Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
 
 Route::get('control-data', 'AjaxController@controlData')->name('controlData');
+Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');

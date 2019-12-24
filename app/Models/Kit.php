@@ -25,6 +25,12 @@ class Kit extends Model
     {
         return $this->belongsTo('App\Models\MyController', 'controller_id');
     }
+
+    public function packets()
+    {
+        return $this->belongsToMany('App\Models\Packet','packet_kit')->withPivot('count');
+    }
+
     public function name()
     {
         return $this->name;

@@ -33,7 +33,7 @@ class Packet extends Model
 
     public function kits()
     {
-        return $this->belongsToMany('App\Models\Kit','packet_kit');
+        return $this->belongsToMany('App\Models\Kit','packet_kit')->withPivot('count');
     }
 
     public function name()
