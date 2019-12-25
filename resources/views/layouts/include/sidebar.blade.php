@@ -23,7 +23,9 @@
                 <span>Kontrol Paneli</span>
             </a>
         </li>
-        <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') || Request::is('packet-kit*') ? 'menu-open' : '' }}">
+        
+        @if(Auth::user()->role->name == 'admin')
+        <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') ? 'menu-open' : '' }}">
             <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -131,7 +133,23 @@
                     </a>
                 </li>
             </ul>
-          </li>
+        </li>
+
+        @endif
+
+        <li> 
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <button type="button" class="btn btn-danger" style="margin-left: 50px; margin-top: 20px;">
+            Çıkış Yap
+            </button>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
+            {{ csrf_field()}}
+        </form>
+        </li>
+
+      
+      
       </ul>
       <!-- /.sidebar-menu -->
     </section>
