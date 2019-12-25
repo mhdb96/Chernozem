@@ -17,6 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('loginpage');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('registerpage');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
+
+Route::group(['middleware' => ['auth']], function () {
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');    
+
 Route::resource('soil', 'SoilController');
 Route::resource('region', 'RegionController');
 Route::resource('input', 'InputController');
@@ -38,3 +53,4 @@ Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants')
 Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
 
 Route::get('control-data', 'AjaxController@controlData')->name('controlData');
+});

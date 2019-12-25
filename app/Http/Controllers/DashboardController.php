@@ -10,4 +10,9 @@ class DashboardController extends Controller
     {
         return \view('dashboard');
     }
+
+    public function permissionDenied()
+    {
+        return view('permission-denied');
+    }
 }
