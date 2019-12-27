@@ -9,7 +9,9 @@
           <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+            @if(Auth::user()->role->name == 'admin')
+                <p>{{ Auth::user()->admin->first_name }} {{ Auth::user()->admin->last_name }}</p>
+            @endif
         </div>
       </div>
 
