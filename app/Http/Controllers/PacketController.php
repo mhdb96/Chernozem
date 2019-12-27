@@ -15,13 +15,21 @@ use App\Models\SoilPlant;
 use App\Models\AreaCapacity;
 use App\Models\Kit;
 
+class Data{
+    public $name;
+    public $soil;
+    public $plant;
+    public $region;
+    public $area;
+    public $id;
+}
 
 class PacketController extends Controller
 {
     private $route = 'packet';
     private $title = 'Paket';
-    private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
+    private $fillables = ['name','soil','plant','region','area'];
+    private $fillables_titles = ['Isim','Toprak','Bitki','Iklim','Saha'];
     private $fillables_types = ['text','one','auto','auto','auto'];
     //['Isim','Iklimler','Topraklar','Bitkiler','Sahalar'
     /**
@@ -32,13 +40,36 @@ class PacketController extends Controller
     public function index()
     {
         $packets = Packet::all();
+        $data = array();
+        foreach($packets as $packet){
+
+            $soil = $packet->soilPlant->regionSoil->soil->name;
+            $plant = $packet->soilPlant->plant->name;
+            $region = $packet->soilPlant->regionSoil->region->name;
+            $area = $packet->area->name;
+
+            $name = $packet->name;
+            $id= $packet->id;
+
+            $d = new Data();
+            $d->soil = $soil;
+            $d->plant = $plant; 
+            $d->region = $region; 
+            $d->name = $name; 
+            $d->area = $area; 
+
+            $d->id = $id; 
+
+            array_push($data,$d);
+
+        } 
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 400,
-            'data' => $packets
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

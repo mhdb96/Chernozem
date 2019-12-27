@@ -36,7 +36,9 @@
             @else 
             <label for="{{$fillable}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}}</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control"
+
+                <input type={{$fillables_types[$key]}} class="form-control"
+                
               name="{{$is_multiple ? $fillable.'[]' : $fillable.''}}"
               id="{{$fillable}}"
               placeholder="{{$fillables_titles[$key]}} Giriniz">

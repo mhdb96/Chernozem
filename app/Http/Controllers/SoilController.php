@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Models\Soil;
 
+class Data{
+    public $id;
+    public $name;
+    public $fertility;
+}
+
 class SoilController extends Controller
 {
-    private $fillables_types = ['text','text'];
+    private $fillables_types = ['text','number'];
     /**
      * Display a listing of the resource.
      *
@@ -17,13 +23,23 @@ class SoilController extends Controller
     public function index()
     {
         $soils = Soil::all();
+        $data=array();
+
+        foreach($soils as $soil){
+            $d = new Data();
+            $d->id = $soil->id;
+            $d->name = $soil->name; 
+            $d->fertility = $soil->fertility.'%';
+            array_push($data,$d);
+        }
         $my_data = array(
             'title' => 'Toprak',
             'route' => 'soil',
             'fillables' => ['name', 'fertility'],
             'fillables_titles' => ['İsim', 'Verimlilik'],
             'empty_space' => 500,
-            'data' => $soils
+            'data' => $data
+            
 
 
         );

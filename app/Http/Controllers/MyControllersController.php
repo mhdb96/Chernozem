@@ -11,7 +11,7 @@ class MyControllersController extends Controller
     private $title = 'Kontrolor';
     private $fillables = ['name','description','unit_price'];
     private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text'];
+    private $fillables_types = ['text','text','number'];
     /**
      * Display a listing of the resource.
      *

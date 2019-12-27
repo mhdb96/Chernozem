@@ -10,15 +10,21 @@ use App\Models\Type;
 use App\Models\RegionSoil;
 use App\Models\SoilPlant;
 
-
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $type;
+    public $unit;
+}
 
 class PlantController extends Controller
 {
     private $route = 'plant';
     private $title = 'Bitki';
-    private $fillables = ['name','unit_price'];
-    private $fillables_titles = ['Isim','Fiyat'];
-    private $fillables_types = ['text','text','one','one','many'];
+    private $fillables = ['name','unit_price','type','unit'];
+    private $fillables_titles = ['Isim','Fiyat','Tip','Birim'];
+    private $fillables_types = ['text','number','one','one','many'];
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +33,24 @@ class PlantController extends Controller
     public function index()
     {
         $plants = Plant::all();
+        $data = array();
+        foreach($plants as $plant){
+            $d = new Data();
+            $d->id = $plant->id;
+            $d->name = $plant->name;
+            $d->unit_price = $plant->unit_price.'₺';
+            $d->type = $plant->type->name;
+            $d->unit = $plant->unit->name;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 700,
-            'data' => $plants
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -46,8 +63,9 @@ class PlantController extends Controller
     public function create()
     {
         $regionSoils = RegionSoil::all();
-        $types = Type::all();        
-        $units = Unit::all();        
+        $types = Type::where('category_id','=','10')->get();
+                   
+        $units = Unit::where('type_id','=','12')->get();    
         if(count($types) == 0)
             return redirect()->route('type.create');
         if(count($units) == 0)

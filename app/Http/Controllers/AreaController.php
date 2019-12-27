@@ -8,13 +8,22 @@ use App\Models\Area;
 use App\Models\Unit;
 use App\Models\Type;
 
+
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $type;
+    public $unit;
+}
+
 class AreaController extends Controller
 {
     private $route = 'area';
     private $title = 'Saha';
-    private $fillables = ['name','unit_price'];
-    private $fillables_titles = ['Isim','Fiyat'];
-    private $fillables_types = ['text','text','one','one'];
+    private $fillables = ['name','unit_price','type','unit'];
+    private $fillables_titles = ['Isim','Fiyat','Tip','Birim'];
+    private $fillables_types = ['text','number','one','one'];
     /**
      * Display a listing of the resource.
      *
@@ -23,13 +32,26 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::all();
+
+        $data = array();
+        foreach($areas as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->unit_price = $item->unit_price.'₺';
+            $d->type = $item->type->name;
+            $d->unit = $item->unit->name;
+            array_push($data,$d);
+        }
+
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 700,
-            'data' => $areas
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

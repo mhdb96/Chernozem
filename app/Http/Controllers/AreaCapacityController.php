@@ -14,7 +14,7 @@ class AreaCapacityController extends Controller
     private $title = 'Saha Kapasite';
     private $fillables = ['capacity'];
     private $fillables_titles = ['Kapasite'];
-    private $fillables_types = ['text','one','one'];
+    private $fillables_types = ['number','one','one'];
     /**
      * Display a listing of the resource.
      *

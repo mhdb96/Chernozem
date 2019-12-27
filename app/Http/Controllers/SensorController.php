@@ -13,7 +13,7 @@ class SensorController extends Controller
     private $title = 'Sensor';
     private $fillables = ['name','description','unit_price'];
     private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text','many'];
+    private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
      *
