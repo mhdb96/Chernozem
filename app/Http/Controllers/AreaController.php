@@ -63,8 +63,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        $types = Type::all();        
-        $units = Unit::all();        
+        $types = Type::where('category_id','=','9')->get();        
+        $units = Unit::where('type_id','=','13')->get();        
         if(count($types) == 0)
             return redirect()->route('type.create');
         if(count($units) == 0)
@@ -116,11 +116,15 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        $types = Type::all();
+        //$types = Type::all();
+        $types = Type::where('category_id','=','9')->get();        
+        $units = Unit::where('type_id','=','13')->get();        
         $insertedTypesIds = array();                            
         array_push($insertedTypesIds, $area->type->id);
 
-        $units = Unit::all();
+        //$units = Unit::all();
+        $units = Unit::where('type_id','=','13')->get();        
+
         $insertedUnitIds = array();                            
         array_push($insertedUnitIds, $area->unit->id);
 

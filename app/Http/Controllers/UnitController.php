@@ -56,7 +56,9 @@ class UnitController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
+        //$types = Type::all();
+        $types = Type::where('category_id','=','11')->get();
+
         //dd($actuators);
         if(count($types) == 0)
             return redirect()->route('type.create');
@@ -105,7 +107,9 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        $types = Type::all();
+        //$types = Type::all();
+        $types = Type::where('category_id','=','11')->get();
+        
         $insertedTypesIds = array();                            
         array_push($insertedTypesIds, $unit->type->id);
         $my_data = array(

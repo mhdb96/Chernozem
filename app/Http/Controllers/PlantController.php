@@ -125,10 +125,14 @@ class PlantController extends Controller
      */
     public function edit(Plant $plant)
     {
-        $types = Type::all();
+        //$types = Type::all();
+        $types = Type::where('category_id','=','10')->get();
+                   
         $insertedTypesIds = array();                            
         array_push($insertedTypesIds, $plant->type->id);
-        $units = Unit::all();
+        //$units = Unit::all();
+        $units = Unit::where('type_id','=','12')->get();    
+
         $insertedUnitIds = array();                            
         array_push($insertedUnitIds, $plant->unit->id);
         $regionSoils = RegionSoil::all();
