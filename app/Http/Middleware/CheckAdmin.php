@@ -14,9 +14,11 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         $userRole = Auth::user()->role->name;
+
         if($userRole != "admin") {
             return redirect('/permission-denied');
         }
+        
         return $next($request);
     }
 }

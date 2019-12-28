@@ -12,9 +12,4 @@ class Customer extends Model
     ];
 
     public $timestamps = false; 
-    
-    public function users() 
-    {
-        return $this->hasOne('App/User');
-    }
 }

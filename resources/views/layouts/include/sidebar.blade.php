@@ -11,6 +11,8 @@
         <div class="pull-left info">
             @if(Auth::user()->role->name == 'admin')
                 <p>{{ Auth::user()->admin->first_name }} {{ Auth::user()->admin->last_name }}</p>
+            @else
+                <p>{{ Auth::user()->customer->first_name }} {{ Auth::user()->customer->last_name }}</p>
             @endif
         </div>
       </div>
@@ -139,15 +141,13 @@
 
         @endif
 
-        <li> 
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <button type="button" class="btn btn-danger" style="margin-left: 50px; margin-top: 20px;">
-            Çıkış Yap
-            </button>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
-            {{ csrf_field()}}
-        </form>
+        <li class="treeview"> 
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-power-off"></i> Çıkış Yap
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
+                @csrf
+            </form>
         </li>
 
       

@@ -26,29 +26,32 @@ Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');    
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout'); 
+    Route::get('/permission-denied', 'DashboardController@permissionDenied')->name('permission-denied');   
 
-    Route::resource('soil', 'SoilController');
-    Route::resource('region', 'RegionController');
-    Route::resource('input', 'InputController');
-    Route::resource('action', 'ActionController');
-    Route::resource('sensor', 'SensorController');
-    Route::resource('actuator', 'ActuatorController');
-    Route::resource('controller', 'MyControllersController');
-    Route::resource('kit', 'KitController');
-    Route::resource('category', 'CategoryController');
-    Route::resource('type', 'TypeController');
-    Route::resource('unit', 'UnitController');
-    Route::resource('plant', 'PlantController');
-    Route::resource('area', 'AreaController');
-    Route::resource('area-capacity', 'AreaCapacityController');
-    Route::resource('packet', 'PacketController');
-    Route::resource('packet-kit', 'PacketKitController');
+    Route::group(['middleware' => ['admin']], function(){
+        Route::resource('soil', 'SoilController');
+        Route::resource('region', 'RegionController');
+        Route::resource('input', 'InputController');
+        Route::resource('action', 'ActionController');
+        Route::resource('sensor', 'SensorController');
+        Route::resource('actuator', 'ActuatorController');
+        Route::resource('controller', 'MyControllersController');
+        Route::resource('kit', 'KitController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('type', 'TypeController');
+        Route::resource('unit', 'UnitController');
+        Route::resource('plant', 'PlantController');
+        Route::resource('area', 'AreaController');
+        Route::resource('area-capacity', 'AreaCapacityController');
+        Route::resource('packet', 'PacketController');
+        Route::resource('packet-kit', 'PacketKitController');
 
-    Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
-    Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
-    Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
+        Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
+        Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
+        Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
 
-    Route::get('control-data', 'AjaxController@controlData')->name('controlData');
-    Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
+        Route::get('control-data', 'AjaxController@controlData')->name('controlData');
+        Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
+    });
 });
