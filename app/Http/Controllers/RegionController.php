@@ -8,9 +8,17 @@ use App\Models\Region;
 use App\Models\Soil;
 use App\Models\RegionSoil;
 
+class Data{
+    public $id;
+    public $name;
+    public $soils = array();
+}
+
 class RegionController extends Controller
 {
     private $fillables_types = ['text','many'];
+    private $fillables = ['name','soils'];
+    private $fillables_titles = ['İsim','Topraklar'];
     /**
      * Display a listing of the resource.
      *
@@ -19,13 +27,28 @@ class RegionController extends Controller
     public function index()
     {        
         $regions = Region::all();
+
+        $data = array();
+        foreach($regions as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $array = array();
+            foreach($item->soils as $soil){
+                array_push($array, $soil->name);
+            }
+            //array_push($d->soil,$array);
+            $d->soils = $array;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => 'İklim',
             'route' => 'region',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'fillables' => $this->fillables,
+            'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $regions
+            'data' => $data
         );
         return view('region.index')->with($my_data);
 

@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MyController;
 
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $description;
+}
+
+
 class MyControllersController extends Controller
 {
     private $route = 'controller';
@@ -20,13 +28,24 @@ class MyControllersController extends Controller
     public function index()
     {
         $controllers = MyController::all();
+
+        $data = array();
+        foreach($controllers as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->unit_price = $item->unit_price.'₺';
+            $d->description = $item->description;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 400,
-            'data' => $controllers
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

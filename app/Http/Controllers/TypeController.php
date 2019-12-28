@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Models\Category;
 
+class Data{
+    public $id;
+    public $name;
+    public $category;
+}
+
 class TypeController extends Controller
 {
     private $route = 'type';
     private $title = 'tip';
-    private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
+    private $fillables = ['name','category'];
+    private $fillables_titles = ['Isim','Kategori'];
     private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
@@ -22,13 +28,23 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::all();
+
+        $data =array();
+        foreach($types as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->category = $item->category->name;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $types
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

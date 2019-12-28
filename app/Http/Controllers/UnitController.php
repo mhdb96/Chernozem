@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Unit;
 use App\Models\Type;
 
+class Data{
+    public $id;
+    public $name;
+    public $type;
+}
+
 class UnitController extends Controller
 {
     private $route = 'unit';
     private $title = 'Unite';
-    private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
+    private $fillables = ['name','type'];
+    private $fillables_titles = ['Isim','Tip'];
     private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
@@ -22,13 +28,23 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
+        
+        $data =array();
+        foreach($units as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->type = $item->type->name;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $units
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

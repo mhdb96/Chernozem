@@ -24,9 +24,17 @@
               @foreach ($data as $key => $item)
                 <tr>
                   <td>{{ ++$key }}</td>
-                  @foreach ($fillables as $fillable)
-                  <td>{{ $item->$fillable}}</td>
-                    @endforeach
+                  @foreach ($fillables as $fillable)                  
+                  @if (is_array($item->$fillable))                
+                    <td style="width : 500px;">
+                      @foreach ($item->$fillable as $f)                                            
+                      {{$f}} <br>                      
+                      @endforeach
+                    </td>
+                  @else
+                    <td>{{ $item->$fillable}}</td>
+                  @endif
+                @endforeach
 
                   <td style="text-align: right;">
                     <a href="{{ route($route.'.edit', $item->id)}}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="bottom" title="Düzenle">

@@ -20,7 +20,9 @@
               <tbody><tr>
                 <th style="width: 35px">#</th>
                 <th style="width: 200px">Paket Adı</th>
-                <th>Kitler</th>
+                <th style="width: 200px;">Kitler</th>
+                <th>Sayısı</th>
+
                 <th style="width: 100px;"></th>
               </tr>
               @foreach ($packets as $key => $packet)
@@ -37,6 +39,13 @@
                     @endif
                       
                   </td>
+                  <td>
+                  @foreach ($packet->kits as $kit)
+                  {{$kit->pivot->count}}
+                  <br>
+                  @endforeach
+                </td>
+
                   <td style="text-align: right;">
                     <a href="{{ route('packet-kit.edit', $packet->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="Düzenle">
                       <i class="fa fa-plus"></i>

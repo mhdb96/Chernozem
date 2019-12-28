@@ -9,12 +9,21 @@ use App\Models\MyController;
 use App\Models\Sensor;
 use App\Models\Actuator;
 
+class Data{
+    public $id;
+    public $name;
+    public $description;
+    public $sensors = array();
+    public $actuators = array();
+    public $myController;
+}
+
 class KitController extends Controller
 {
     private $route = 'kit';
     private $title = 'Kit';
-    private $fillables = ['name','description'];
-    private $fillables_titles = ['Isim','Aciklama'];
+    private $fillables = ['name','description','sensors','actuators','myController'];
+    private $fillables_titles = ['Isim','Aciklama','Sensötler','Eyleyiciler','Kontroller'];
     private $fillables_types = ['text','text','many','many','one'];
     /**
      * Display a listing of the resource.
@@ -24,13 +33,38 @@ class KitController extends Controller
     public function index()
     {
         $kits = Kit::all();
+
+        $data = array();
+        foreach($kits as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->description = $item->description;
+            $d->myController = $item->myController->name;
+
+            $sensor_array = array();
+            $actuators_array = array();
+            foreach($item->sensors as $sensor){
+                array_push($sensor_array, $sensor->name);
+            }
+            foreach($item->actuators as $actuator){
+                array_push($actuators_array, $actuator->name);
+
+            }
+            //array_push($d->soil,$array);
+            $d->sensors = $sensor_array;
+            $d->actuators = $actuators_array;
+
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 700,
-            'data' => $kits
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

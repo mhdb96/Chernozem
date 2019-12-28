@@ -16,14 +16,15 @@ class Data{
     public $unit_price;
     public $type;
     public $unit;
+    public $regions = array();
 }
 
 class PlantController extends Controller
 {
     private $route = 'plant';
     private $title = 'Bitki';
-    private $fillables = ['name','unit_price','type','unit'];
-    private $fillables_titles = ['Isim','Fiyat','Tip','Birim'];
+    private $fillables = ['name','unit_price','type','unit','regions'];
+    private $fillables_titles = ['Isim','Fiyat','Tip','Birim','İklim ve Toprak Türleri'];
     private $fillables_types = ['text','number','one','one','many'];
     /**
      * Display a listing of the resource.
@@ -41,6 +42,12 @@ class PlantController extends Controller
             $d->unit_price = $plant->unit_price.'₺';
             $d->type = $plant->type->name;
             $d->unit = $plant->unit->name;
+            $array = array();
+
+            foreach($plant->regionSoils as $region){
+                array_push($array, $region->region->name.' - '.$region->soil->name );
+            }
+            $d->regions = $array;
             array_push($data,$d);
         }
 
