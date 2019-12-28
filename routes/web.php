@@ -10,21 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return redirect('login');
+});
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('loginpage');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
-
-// Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('registerpage');
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 
