@@ -73,7 +73,7 @@ class AreaController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price' ,$types, $units],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Unite'],
+            'fillables_titles' => ['Isim','Fiyat','Tipler','Birim'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        

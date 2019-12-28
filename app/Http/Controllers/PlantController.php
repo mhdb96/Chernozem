@@ -81,7 +81,7 @@ class PlantController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price' ,$types, $units, $regionSoils],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Unite','Iklim Topraklari'],
+            'fillables_titles' => ['Isim','Fiyat','Tipler','Birim','Iklim Topraklari'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        

@@ -8,7 +8,7 @@ use App\Models\Action;
 class ActionController extends Controller
 {
     private $route = 'action';
-    private $title = 'Aksiyon';
+    private $title = 'Eylem';
     private $fillables = ['name'];
     private $fillables_titles = ['Isim'];
     private $fillables_types = ['text'];

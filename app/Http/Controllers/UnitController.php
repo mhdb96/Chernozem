@@ -16,7 +16,7 @@ class Data{
 class UnitController extends Controller
 {
     private $route = 'unit';
-    private $title = 'Unite';
+    private $title = 'Birim';
     private $fillables = ['name','type'];
     private $fillables_titles = ['Isim','Tip'];
     private $fillables_types = ['text','one'];

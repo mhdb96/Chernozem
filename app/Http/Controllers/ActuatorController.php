@@ -20,7 +20,7 @@ class ActuatorController extends Controller
     private $route = 'actuator';
     private $title = 'Eyleyici';
     private $fillables = ['name','description','unit_price','actions'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat','Eyleyici Türleri'];
+    private $fillables_titles = ['Isim','Aciklama','Fiyat','Eylemler'];
     private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
