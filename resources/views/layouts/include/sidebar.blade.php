@@ -141,6 +141,23 @@
 
         @endif
 
+        <li class="treeview">
+            <a href="#">
+              <i class="fa fa-edit"></i> <span>Proje İşlemleri</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+                <li><a href="{{ route('project.create') }}">Proje Oluştur</a></li>
+
+                @foreach (\App\Models\Project::all() as $project)
+                    <li><a href="{{ route('project.show', $project->id) }}">{{ $project->name }}</a></li>
+                @endforeach
+
+            </ul>
+        </li>
+
         <li class="treeview"> 
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-power-off"></i> Çıkış Yap

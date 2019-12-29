@@ -25,7 +25,6 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::group(['middleware' => ['auth']], function () {
-
     Route::post('logout', 'Auth\LoginController@logout')->name('logout'); 
     Route::get('/permission-denied', 'DashboardController@permissionDenied')->name('permission-denied');   
 
@@ -54,4 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('control-data', 'AjaxController@controlData')->name('controlData');
         Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
     });
+
+    Route::resource('project', 'ProjectController');
 });

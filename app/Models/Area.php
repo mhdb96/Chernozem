@@ -30,6 +30,17 @@ class Area extends Model
     {
         return $this->belongsTo('App\Models\Unit');
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project', 'project_area')->withPivot('name');
+    }
+
+    public function areaCapacity()
+    {
+        return $this->hasOne('App\Models\AreaCapacity');
+    }
+
     public function name()
     {
         return $this->name;

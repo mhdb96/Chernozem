@@ -10,3 +10,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { vertical-align: middle; }
 .user-panel>.info { top: 20px; }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered { padding: 0px 12px; }
+
+.greenhouse {
+    background-color: rgba(0,0,0,0.15);
+    -webkit-mask: url('../greenhouse.svg') no-repeat center;
+    mask: url('../greenhouse.svg') no-repeat center;
+    width: 65px;
+    height: 80px;
+    margin-top: 10px;
+}

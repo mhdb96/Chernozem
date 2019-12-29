@@ -31,6 +31,11 @@ class Kit extends Model
         return $this->belongsToMany('App\Models\Packet','packet_kit')->withPivot('count');
     }
 
+    public function projectArea()
+    {
+        return $this->belongsToMany('App\Models\ProjectArea', 'project_area_kit')->withPivot('name');
+    }
+
     public function name()
     {
         return $this->name;

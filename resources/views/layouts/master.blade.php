@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="{{ asset('plugins/iCheck/all.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/iCheck/line/blue.css') }}">
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
   <!-- Theme style -->
@@ -17,6 +22,8 @@
   <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+  
+  @stack('styles')
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -58,6 +65,11 @@
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+<!-- bootstrap datepicker -->
+<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js') }}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{ asset('plugins/iCheck/icheck.min.js') }}"></script>
 
 @stack('scripts')
 
