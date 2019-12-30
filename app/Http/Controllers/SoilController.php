@@ -126,8 +126,12 @@ class SoilController extends Controller
         $isExist = RegionSoil::where('soil_id', $id)->exists();
         
         if($isExist)
-            return redirect('/soil')->with('warning', 'Bu toprak türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+            return redirect('/soil')
+                ->with('warning', 'Bu toprak türü diğer tablolarla ilişki olduğu için silemezsiniz.');
 
-        return redirect()->route('soil.index');
+        Soil::find($id)->delete();
+
+        return redirect('/soil')
+            ->with('success', 'Toprak silme işlemi başarılı bir şekilde gerçekleştirildi');
     }
 }
