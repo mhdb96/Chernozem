@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Soil;
+use App\Models\RegionSoil;
 
 class SoilController extends Controller
 {
@@ -120,16 +121,12 @@ class SoilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Soil $soil)
+    public function destroy($id)
     {
-        try {
-            $soil->delete();
-        } catch (\Throwable $th) {
-            // TODO - mesaj gönderilecek.
-            // mesaj gönderilecek.
-            return redirect()->route('soil.index');
-        }
-
+        $isExist = RegionSoil::where('soil_id', $id)->exists();
+        
+        if($isExist)
+            return redirect('/soil')->with('warning', 'Bu toprak türü diğer tablolarla ilişki olduğu için silemezsiniz.');
 
         return redirect()->route('soil.index');
     }
