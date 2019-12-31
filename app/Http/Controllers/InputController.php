@@ -8,6 +8,12 @@ use App\Models\Input;
 class InputController extends Controller
 {
     private $fillables_types = ['text'];
+    
+    public function __construct()
+    {
+        $this->middleware('admin')->except('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,9 +76,11 @@ class InputController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Input $input, Request $request)
     {
-        //
+        $mac_adress = $request->session()->get('mac_adress');
+        
+        return view('input.chart', compact('input', 'mac_adress'));
     }
 
     /**

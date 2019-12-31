@@ -88,7 +88,8 @@ class ProjectController extends Controller
         // project_area_kit store
         foreach ($project->projectArea as $projectArea) {
             foreach ($kits as $kit) {
-                $projectArea->kits()->attach($kit->id, ['name' => 'asdasd']);
+                $projectAreaKitName = $projectArea->name.'_'.$kit->name;
+                $projectArea->kits()->attach($kit->id, ['name' => $projectAreaKitName]);
             }
         }
         
@@ -101,11 +102,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        $projectAreas = Project::find($id)->projectArea;
-        // dd($projectAreas);
-        return view('project.index', compact('projectAreas'));
+        $projectAreas = $project->projectArea;
+
+        return view('project.index', compact('projectAreas', 'project'));
     }
 
     /**

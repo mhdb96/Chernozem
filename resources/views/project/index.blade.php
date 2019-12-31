@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', ' Kit Ekleme Formu')
+@section('title', $project->name.' Listesi')
 
-@section('content-title', 'asd')
-@section('content-description', 'Kit Ekleme Formu')
-@section('breadcrumb-title', 'Pakete Kit Ekle')
+@section('content-title', $project->name)
+@section('content-description', 'Listesi')
+@section('breadcrumb-title', $project->name)
 
 @section('content')
 <section class="content">
@@ -13,10 +13,10 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>{{ $item->name }}</h3>
+                        <h2>{{ $item->name }}</h2>
                     </div>
                     <div class="icon greenhouse"></div>
-                    <a href="#" class="small-box-footer">
+                    <a href="{{ route('project-area.show', $item->id) }}" class="small-box-footer">
                         İncele <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

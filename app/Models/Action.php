@@ -12,10 +12,10 @@ class Action extends Model
 
     public $timestamps = false;
 
-    // public function regions()
-    // {
-    //     return $this->belongsToMany('App\Models\Region');
-    // }
+    public function actuators()
+    {
+        return $this->belongsToMany('App\Models\Actuator');
+    }
     public function name()
     {
         return $this->name;

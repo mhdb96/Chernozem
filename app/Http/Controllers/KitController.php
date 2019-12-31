@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Kit;
 use App\Models\MyController;
@@ -16,6 +17,12 @@ class KitController extends Controller
     private $fillables = ['name','description'];
     private $fillables_titles = ['Isim','Aciklama'];
     private $fillables_types = ['text','text','many','many','one'];
+
+    public function __construct()
+    {
+        $this->middleware('admin')->except('show');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -87,9 +94,35 @@ class KitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kit $kit, Request $request)
     {
-        //
+        $projectAreaKit = DB::table('project_area_kit')->where([
+            ['project_area_id', '=', $request->input('project_area_id')],
+            ['kit_id', '=', $kit->id],
+            ['mac_adress', '<>', null]
+        ])->get()->first();
+
+        if ($projectAreaKit == null)
+            return redirect()->back()->with('warning', 'Bu kite şu anda ulaşılamıyor');
+        else 
+            $request->session()->put('mac_adress', $projectAreaKit->mac_adress);
+        
+
+        $actions = array();
+        foreach ($kit->actuators as $actuator) {
+            foreach ($actuator->actions as $action) {
+                array_push($actions, $action);
+            }            
+        }
+
+        $inputs = array();
+        foreach ($kit->sensors as $sensors) {
+            foreach ($sensors->inputs as $input) {
+                array_push($inputs, $input);
+            }            
+        }
+
+        return view('input.list', compact('inputs', 'actions', 'kit'));
     }
 
     /**

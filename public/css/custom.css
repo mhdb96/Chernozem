@@ -19,3 +19,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     height: 80px;
     margin-top: 10px;
 }
+.sensor {
+    background: url('../motion-sensor.svg') no-repeat center;
+    width: 65px;
+    height: 80px;
+    margin-top: 10px;
+    background-size: 100%;
+}
+.inner-sensor {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}

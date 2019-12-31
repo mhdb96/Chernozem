@@ -141,6 +141,7 @@
 
         @endif
 
+        @if(Auth::user()->role->name == 'customer')
         <li class="treeview">
             <a href="#">
               <i class="fa fa-edit"></i> <span>Proje İşlemleri</span>
@@ -157,6 +158,7 @@
 
             </ul>
         </li>
+        @endif
 
         <li class="treeview"> 
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

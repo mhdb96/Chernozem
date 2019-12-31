@@ -30,13 +30,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['admin']], function(){
         Route::resource('soil', 'SoilController');
-        Route::resource('region', 'RegionController');
-        Route::resource('input', 'InputController');
+        Route::resource('region', 'RegionController');        
         Route::resource('action', 'ActionController');
         Route::resource('sensor', 'SensorController');
         Route::resource('actuator', 'ActuatorController');
-        Route::resource('controller', 'MyControllersController');
-        Route::resource('kit', 'KitController');
+        Route::resource('controller', 'MyControllersController');        
         Route::resource('category', 'CategoryController');
         Route::resource('type', 'TypeController');
         Route::resource('unit', 'UnitController');
@@ -54,5 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
     });
 
+    Route::resource('input', 'InputController');
+    Route::resource('kit', 'KitController');
+
     Route::resource('project', 'ProjectController');
+    Route::resource('project-area', 'ProjectAreaController');
 });
