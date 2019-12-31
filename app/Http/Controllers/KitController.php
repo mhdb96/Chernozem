@@ -122,7 +122,9 @@ class KitController extends Controller
             }            
         }
 
-        return view('input.list', compact('inputs', 'actions', 'kit'));
+        $mac_adress = $request->session()->get('mac_adress');
+
+        return view('input.list', compact('inputs', 'actions', 'kit', 'mac_adress'));
     }
 
     /**

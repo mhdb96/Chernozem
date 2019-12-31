@@ -46,3 +46,26 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
         });
     });
 }
+
+function updateSetters(mac_adress, input) {
+    var updates = {};
+    updates[`${mac_adress}/Setters/${input.value}`] = getBoolean(input.checked);
+    firebase.database().ref().update(updates);
+}
+
+function getBoolean(data) {
+    if(data == true) 
+        return 1;
+    else if(data == false) 
+        return 0;
+}
+
+function getSetters(mac_adress, inputs) {
+    fetchedSetters = firebase.database().ref(`${mac_adress}/Setters`);
+
+    fetchedSetters.once('value', function(snapshot) {
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = snapshot.val()[inputs[i].value];
+        }
+    });
+}
