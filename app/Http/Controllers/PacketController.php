@@ -210,9 +210,21 @@ class PacketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Packet $packet)
+    public function destroy($id)
     {
+        $isExist = DB::table('packet_kit')->where('packet_id', $id)->exists();
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Packet::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
         $packet->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Area;
 use App\Models\Unit;
@@ -163,9 +164,24 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Area $area)
+    public function destroy($id)
     {
+        $isExistCapacity = DB::table('area_capacity')->where('area_id', $id)->exists();
+        $isExistPackets = DB::table('packets')->where('area_id', $id)->exists();
+        $isExistProject = DB::table('project_area')->where('area_id', $id)->exists();
+
+        if($isExistCapacity | $isExistPackets | $isExistProject)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Area::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
         $area->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

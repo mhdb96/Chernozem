@@ -161,6 +161,6 @@ class ActuatorController extends Controller
     {
         $actuator->actions()->detach();
         $actuator->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index')->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Kit;
 use App\Models\MyController;
@@ -186,11 +187,27 @@ class KitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kit $kit)
+    public function destroy($id)
     {
+        $isExist = DB::table('project_area_kit')->where('kit_id', $id)->exists();
+
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Kit::find($id)->sensors()->detach();
+            Kit::find($id)->actuators()->detach();
+            Kit::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+/*
         $kit->sensors()->detach();
         $kit->actuators()->detach();
         $kit->delete();
         return redirect()->route($this->route.'.index');
+  */
     }
 }

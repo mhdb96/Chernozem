@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Soil;
+use App\Models\RegionSoil;
 
 class Data{
     public $id;
@@ -14,6 +15,8 @@ class Data{
 
 class SoilController extends Controller
 {
+    private $route = 'soil';
+    private $title = 'Toprak';
     private $fillables_types = ['text','number'];
     /**
      * Display a listing of the resource.
@@ -136,17 +139,30 @@ class SoilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Soil $soil)
+    public function destroy($id)
     {
+
+        $isExist = RegionSoil::where('soil_id', $id)->exists();
+        
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Soil::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success',  $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
         try {
             $soil->delete();
         } catch (\Throwable $th) {
             // TODO - mesaj gönderilecek.
             // mesaj gönderilecek.
             return redirect()->route('soil.index');
-        }
+        }*/
 
 
-        return redirect()->route('soil.index');
     }
 }

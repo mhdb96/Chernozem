@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Input;
+use Illuminate\Support\Facades\DB;
+
 
 class InputController extends Controller
 {
+    private $route = 'input';
+    private $title = 'Giriş';
     private $fillables_types = ['text'];
     /**
      * Display a listing of the resource.
@@ -116,8 +120,20 @@ class InputController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Input $input)
+    public function destroy($id)
     {
+        $isExist = DB::table('input_sensor')->where('input_id', $id)->exists();
+
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+            Input::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
         try {
             $input->delete();
         } catch (\Throwable $th) {
@@ -125,6 +141,6 @@ class InputController extends Controller
             // mesaj gönderilecek.
             return redirect()->route('input.index');
         }
-        return redirect()->route('input.index');
+        return redirect()->route('input.index');*/
     }
 }

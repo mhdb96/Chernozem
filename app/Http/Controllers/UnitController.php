@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Unit;
 use App\Models\Type;
+use DB;
 
 class Data{
     public $id;
@@ -144,9 +145,22 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unit $unit)
+    public function destroy($id)
     {
+        $isExistPlant = DB::table('plants')->where('unit_id', $id)->exists();
+        $isExistArea = DB::table('areas')->where('unit_id', $id)->exists();
+        if($isExistPlant | $isExistArea)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+
+            Unit::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+        /*
         $unit->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

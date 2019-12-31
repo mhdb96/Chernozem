@@ -159,6 +159,6 @@ class SensorController extends Controller
     {
         $sensor->inputs()->detach();
         $sensor->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index')->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
     }
 }

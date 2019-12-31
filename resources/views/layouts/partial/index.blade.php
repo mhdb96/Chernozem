@@ -2,6 +2,9 @@
 @section('content')
 <section class="content">
     <div class="row">
+
+      @include('layouts.include.alert')
+
       <div class="col-xs-12">
         <div class="box box-primary">
           <div class="box-header" style="padding: 20px 10px">
