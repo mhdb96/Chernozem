@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="kits" class="col-sm-2 control-label">Kitler</label>
                     <div class="col-sm-8">
-                        <select class="form-control select2" multiple name="kits[]" data-placeholder="Kitleri Seçin" style="width: 100%;">
+                        <select class="form-control select2" multiple name="kits[]" data-placeholder="Kitleri Seçin" style="width: 100%;" required>
                             @foreach ($kits as $kit)                                
                                 <option value="{{ $kit->id }}" {{ in_array($kit->id, $selectedKitIds) ? 'selected' : '' }}>{{ $kit->name }}</option>
                             @endforeach

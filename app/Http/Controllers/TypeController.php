@@ -6,13 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Models\Type;
 use App\Models\Category;
+use DB;
+
+class Data{
+    public $id;
+    public $name;
+    public $category;
+}
 
 class TypeController extends Controller
 {
     private $route = 'type';
     private $title = 'tip';
-    private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
+    private $fillables = ['name','category'];
+    private $fillables_titles = ['Isim','Kategori'];
     private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
@@ -22,13 +29,23 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::all();
+
+        $data =array();
+        foreach($types as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->category = $item->category->name;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $types
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -124,9 +141,24 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy($id)
     {
+        
+        $isExistPlant = DB::table('plants')->where('type_id', $id)->exists();
+        $isExistUnit = DB::table('units')->where('type_id', $id)->exists();
+        $isExistArea = DB::table('areas')->where('type_id', $id)->exists();
+        if($isExistPlant | $isExistUnit | $isExistArea)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+
+            Type::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+        /*
         $type->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

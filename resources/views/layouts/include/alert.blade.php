@@ -6,7 +6,7 @@
             {{ session()->get('warning') }}
         </div>
     </div>
-@endif
+@endif 
 
 @if(session()->get('success'))
     <div class="col-xs-12">
@@ -16,4 +16,4 @@
             {{ session()->get('success') }}
         </div>
     </div>
-@endif
+@endif 

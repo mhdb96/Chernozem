@@ -6,14 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Sensor;
 use App\Models\Input;
 
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $description;
+    public $inputs = array();
+}
 
 class SensorController extends Controller
 {
     private $route = 'sensor';
     private $title = 'Sensor';
-    private $fillables = ['name','description','unit_price'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text','many'];
+    private $fillables = ['name','description','unit_price','inputs'];
+    private $fillables_titles = ['Isim','Aciklama','Fiyat','Girişler'];
+    private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
      *
@@ -22,13 +29,31 @@ class SensorController extends Controller
     public function index()
     {
         $sensors = Sensor::all();
+
+        $data = array();
+        foreach($sensors as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->description = $item->description;
+            $d->unit_price = $item->unit_price.'₺';
+
+            $array = array();
+            foreach($item->inputs as $input){
+                array_push($array, $input->name);
+            }
+            $d->inputs = $array;
+
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 500,
-            'data' => $sensors
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -134,6 +159,6 @@ class SensorController extends Controller
     {
         $sensor->inputs()->detach();
         $sensor->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index')->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
     }
 }

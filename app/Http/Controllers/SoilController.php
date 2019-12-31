@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Soil;
 use App\Models\RegionSoil;
 
+class Data{
+    public $id;
+    public $name;
+    public $fertility;
+}
+
 class SoilController extends Controller
 {
-    private $fillables_types = ['text','text'];
+    private $route = 'soil';
+    private $title = 'Toprak';
+    private $fillables_types = ['text','number'];
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +26,23 @@ class SoilController extends Controller
     public function index()
     {
         $soils = Soil::all();
+        $data=array();
+
+        foreach($soils as $soil){
+            $d = new Data();
+            $d->id = $soil->id;
+            $d->name = $soil->name; 
+            $d->fertility = $soil->fertility.'%';
+            array_push($data,$d);
+        }
         $my_data = array(
             'title' => 'Toprak',
             'route' => 'soil',
             'fillables' => ['name', 'fertility'],
             'fillables_titles' => ['İsim', 'Verimlilik'],
             'empty_space' => 500,
-            'data' => $soils
+            'data' => $data
+            
 
 
         );
@@ -123,15 +141,29 @@ class SoilController extends Controller
      */
     public function destroy($id)
     {
+
         $isExist = RegionSoil::where('soil_id', $id)->exists();
         
         if($isExist)
-            return redirect('/soil')
-                ->with('warning', 'Bu toprak türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Soil::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success',  $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
+        try {
+            $soil->delete();
+        } catch (\Throwable $th) {
+            // TODO - mesaj gönderilecek.
+            // mesaj gönderilecek.
+            return redirect()->route('soil.index');
+        }*/
 
         Soil::find($id)->delete();
 
-        return redirect('/soil')
-            ->with('success', 'Toprak silme işlemi başarılı bir şekilde gerçekleştirildi');
     }
 }

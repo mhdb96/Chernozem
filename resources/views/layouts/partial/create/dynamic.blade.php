@@ -5,7 +5,7 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">{{$fillables_titles[$key]}}</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="{{$fillable}}[]" placeholder="{{$fillables_titles[$key]}} Türü">
+                <input type="text" class="form-control" name="{{$fillable}}[]" placeholder="{{$fillables_titles[$key]}} Türü" required>
             </div>
         </div>
     @endforeach

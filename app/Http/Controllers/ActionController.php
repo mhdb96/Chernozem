@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Action;
+use Illuminate\Support\Facades\DB;
+
 
 class ActionController extends Controller
 {
     private $route = 'action';
-    private $title = 'Aksiyon';
+    private $title = 'Eylem';
     private $fillables = ['name'];
     private $fillables_titles = ['Isim'];
     private $fillables_types = ['text'];
@@ -118,8 +120,21 @@ class ActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Action $action)
+    public function destroy($id)
     {
+        $isExist = DB::table('action_actuator')->where('action_id', $id)->exists();
+
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+
+            Action::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+        /*
         try {
             $action->delete();
         } catch (\Throwable $th) {
@@ -127,6 +142,6 @@ class ActionController extends Controller
             // mesaj gönderilecek.
             return redirect()->route($this->route.'.index');
         }
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

@@ -9,7 +9,7 @@ class Area extends Model
     protected $table = 'areas';
 
     protected $fillable = ['name', 'unit_price'];
-
+    
     public $timestamps = false;
 
 

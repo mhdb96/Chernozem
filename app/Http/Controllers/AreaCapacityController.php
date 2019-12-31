@@ -8,13 +8,20 @@ use App\Models\AreaCapacity;
 use App\Models\Area;
 use App\Models\Plant;
 
+class Data{
+    public $id;
+    public $capacity;
+    public $plant;
+    public $area;
+}
+
 class AreaCapacityController extends Controller
 {
     private $route = 'area-capacity';
     private $title = 'Saha Kapasite';
-    private $fillables = ['capacity'];
-    private $fillables_titles = ['Kapasite'];
-    private $fillables_types = ['text','one','one'];
+    private $fillables = ['capacity','plant','area'];
+    private $fillables_titles = ['Kapasite','Bitki','Saha'];
+    private $fillables_types = ['number','one','one'];
     /**
      * Display a listing of the resource.
      *
@@ -23,13 +30,25 @@ class AreaCapacityController extends Controller
     public function index()
     {
         $areaCapacites = AreaCapacity::all();
+
+        $data =array();
+        foreach($areaCapacites as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->capacity = $item->capacity.'kg';
+            $d->plant = $item->plant->name;
+            $d->area = $item->area->name;
+            array_push($data,$d);
+        }
+
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 700,
-            'data' => $areaCapacites
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }

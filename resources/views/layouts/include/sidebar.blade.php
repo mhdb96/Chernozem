@@ -94,7 +94,7 @@
             </li>
             <li class="{{ Request::is('action*') ? 'active' : '' }}">
                 <a href="{{ route('action.index') }}">
-                    <span>Aksiyon İşlemleri</span>
+                    <span>Eylem İşlemleri</span>
                 </a>
             </li>
             <li class="{{ Request::is('sensor*') ? 'active' : '' }}">
@@ -133,7 +133,7 @@
                 </li>
                 <li class="{{ Request::is('unit*') ? 'active' : '' }}">
                     <a href="{{ route('unit.index') }}">
-                        <span>Unite İşlemleri</span>
+                        <span>Birim İşlemleri</span>
                     </a>
                 </li>
             </ul>

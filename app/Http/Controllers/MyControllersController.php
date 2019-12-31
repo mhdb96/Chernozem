@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MyController;
+use Illuminate\Support\Facades\DB;
+
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $description;
+}
+
 
 class MyControllersController extends Controller
 {
@@ -11,7 +20,7 @@ class MyControllersController extends Controller
     private $title = 'Kontrolor';
     private $fillables = ['name','description','unit_price'];
     private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text'];
+    private $fillables_types = ['text','text','number'];
     /**
      * Display a listing of the resource.
      *
@@ -20,13 +29,24 @@ class MyControllersController extends Controller
     public function index()
     {
         $controllers = MyController::all();
+
+        $data = array();
+        foreach($controllers as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->unit_price = $item->unit_price.'₺';
+            $d->description = $item->description;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 400,
-            'data' => $controllers
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -121,8 +141,22 @@ class MyControllersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MyController $controller)
+    public function destroy($id)
     {
+
+        $isExist = DB::table('kits')->where('controller_id', $id)->exists();
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+
+            MyController::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+                /*
         try {
             $controller->delete();
         } catch (\Throwable $th) {
@@ -130,6 +164,6 @@ class MyControllersController extends Controller
             // mesaj gönderilecek.
             return redirect()->route($this->route.'.index');
         }
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

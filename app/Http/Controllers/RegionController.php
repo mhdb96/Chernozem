@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -8,9 +9,19 @@ use App\Models\Region;
 use App\Models\Soil;
 use App\Models\RegionSoil;
 
+class Data{
+    public $id;
+    public $name;
+    public $soils = array();
+}
+
 class RegionController extends Controller
 {
+    private $route = 'region';
+    private $title = 'İklim';
     private $fillables_types = ['text','many'];
+    private $fillables = ['name','soils'];
+    private $fillables_titles = ['İsim','Topraklar'];
     /**
      * Display a listing of the resource.
      *
@@ -19,13 +30,28 @@ class RegionController extends Controller
     public function index()
     {        
         $regions = Region::all();
+
+        $data = array();
+        foreach($regions as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $array = array();
+            foreach($item->soils as $soil){
+                array_push($array, $soil->name);
+            }
+            //array_push($d->soil,$array);
+            $d->soils = $array;
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => 'İklim',
             'route' => 'region',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'fillables' => $this->fillables,
+            'fillables_titles' => $this->fillables_titles,
             'empty_space' => 1000,
-            'data' => $regions
+            'data' => $data
         );
         return view('region.index')->with($my_data);
 
@@ -138,11 +164,27 @@ class RegionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Region $region)
+    public function destroy($id)
     {
+         $items=RegionSoil::select('id')->where('region_id',$id)->get();
+        foreach($items as $item){
+            $isExist = DB::table('soil_plant')->where('region_soil_id', $item->id)->exists();
+
+            if($isExist)
+            {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+            } 
+        }
+            Region::find($id)->soils()->detach();
+            Region::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+        /*
+        
         $region->soils()->detach();
         $region->delete();
 
-        return redirect()->route('region.index');
+        return redirect()->route('region.index');*/
     }
 }

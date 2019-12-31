@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -117,8 +118,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $isExist = DB::table('types')->where('category_id', $id)->exists();
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+
+            Category::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+        /*
         try {
             $category->delete();
         } catch (\Throwable $th) {
@@ -126,6 +140,6 @@ class CategoryController extends Controller
             // mesaj gönderilecek.
             return redirect()->route($this->route.'.index');
         }
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index');*/
     }
 }

@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\Actuator;
 use App\Models\Action;
 
+
+class Data{
+    public $id;
+    public $name;
+    public $unit_price;
+    public $description;
+    public $actions = array();
+}
+
 class ActuatorController extends Controller
 {
     private $route = 'actuator';
     private $title = 'Eyleyici';
-    private $fillables = ['name','description','unit_price'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat'];
-    private $fillables_types = ['text','text','text','many'];
+    private $fillables = ['name','description','unit_price','actions'];
+    private $fillables_titles = ['Isim','Aciklama','Fiyat','Eylemler'];
+    private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +30,32 @@ class ActuatorController extends Controller
     public function index()
     {
         $actuators = Actuator::all();
+
+        $data = array();
+        foreach($actuators as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->unit_price = $item->unit_price.'₺';
+            $d->description = $item->description;
+
+            $array = array();
+            foreach($item->actions as $action){
+                array_push($array, $action->name);
+            }
+            $d->actions = $array;
+
+
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 500,
-            'data' => $actuators
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -133,6 +161,6 @@ class ActuatorController extends Controller
     {
         $actuator->actions()->detach();
         $actuator->delete();
-        return redirect()->route($this->route.'.index');
+        return redirect()->route($this->route.'.index')->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');;
     }
 }

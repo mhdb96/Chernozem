@@ -10,12 +10,21 @@ use App\Models\MyController;
 use App\Models\Sensor;
 use App\Models\Actuator;
 
+class Data{
+    public $id;
+    public $name;
+    public $description;
+    public $sensors = array();
+    public $actuators = array();
+    public $myController;
+}
+
 class KitController extends Controller
 {
     private $route = 'kit';
     private $title = 'Kit';
-    private $fillables = ['name','description'];
-    private $fillables_titles = ['Isim','Aciklama'];
+    private $fillables = ['name','description','sensors','actuators','myController'];
+    private $fillables_titles = ['Isim','Aciklama','Sensötler','Eyleyiciler','Kontroller'];
     private $fillables_types = ['text','text','many','many','one'];
 
     public function __construct()
@@ -31,13 +40,38 @@ class KitController extends Controller
     public function index()
     {
         $kits = Kit::all();
+
+        $data = array();
+        foreach($kits as $item){
+            $d = new Data();
+            $d->id = $item->id;
+            $d->name = $item->name;
+            $d->description = $item->description;
+            $d->myController = $item->myController->name;
+
+            $sensor_array = array();
+            $actuators_array = array();
+            foreach($item->sensors as $sensor){
+                array_push($sensor_array, $sensor->name);
+            }
+            foreach($item->actuators as $actuator){
+                array_push($actuators_array, $actuator->name);
+
+            }
+            //array_push($d->soil,$array);
+            $d->sensors = $sensor_array;
+            $d->actuators = $actuators_array;
+
+            array_push($data,$d);
+        }
+
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => $this->fillables,
             'fillables_titles' => $this->fillables_titles,
             'empty_space' => 700,
-            'data' => $kits
+            'data' => $data
         );
         return view($this->route.'.index')->with($my_data);
     }
@@ -187,11 +221,27 @@ class KitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kit $kit)
+    public function destroy($id)
     {
+        $isExist = DB::table('project_area_kit')->where('kit_id', $id)->exists();
+
+        if($isExist)
+        {
+            return redirect('/'.$this->route)
+            ->with('warning', 'Bu '.$this->title.' türü diğer tablolarla ilişki olduğu için silemezsiniz.');
+        }       
+
+            Kit::find($id)->sensors()->detach();
+            Kit::find($id)->actuators()->detach();
+            Kit::find($id)->delete();
+            return redirect('/'.$this->route)
+                ->with('success', $this->title.' silme işlemi başarılı bir şekilde gerçekleştirildi');
+
+/*
         $kit->sensors()->detach();
         $kit->actuators()->detach();
         $kit->delete();
         return redirect()->route($this->route.'.index');
+  */
     }
 }
