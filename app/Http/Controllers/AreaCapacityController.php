@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\AreaCapacity;
 use App\Models\Area;
 use App\Models\Plant;
+use App\Models\Unit;
+
 
 class Data{
     public $id;
@@ -30,12 +32,14 @@ class AreaCapacityController extends Controller
     public function index()
     {
         $areaCapacites = AreaCapacity::all();
-
         $data =array();
+        
+        $unit = Unit::where('id','=',$areaCapacites->first()->plant->unit_id)->first();
+
         foreach($areaCapacites as $item){
             $d = new Data();
             $d->id = $item->id;
-            $d->capacity = $item->capacity.'kg';
+            $d->capacity = $item->capacity.' '.$unit->name;
             $d->plant = $item->plant->name;
             $d->area = $item->area->name;
             array_push($data,$d);
