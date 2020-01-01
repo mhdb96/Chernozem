@@ -1,5 +1,5 @@
 <div class="box-body">
-    @foreach ($fillables as $key => $fillable)    
+    @foreach ($fillables as $key => $fillable) 
     <div class="form-group">
       @if($fillables_types[$key] == 'many')
         <label for="{{$fillable[0]->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>

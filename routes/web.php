@@ -44,6 +44,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('packet', 'PacketController');
         Route::resource('packet-kit', 'PacketKitController');
 
+        
+        Route::resource('mac-address', 'MacAddressController');
+
+
+
         Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
         Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
         Route::get('areas', 'AjaxController@getAreas')->name('getAreas');

@@ -136,6 +136,11 @@
                         <span>Birim İşlemleri</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('mac-address*') ? 'active' : '' }}">
+                    <a href="{{ route('mac-address.index') }}">
+                        <span>Mac İşlemleri</span>
+                    </a>
+                </li>
             </ul>
         </li>
 
