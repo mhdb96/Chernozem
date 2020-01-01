@@ -33,9 +33,7 @@ class AreaCapacityController extends Controller
     {
         $areaCapacites = AreaCapacity::all();
         $data =array();
-        
-        $unit = Unit::where('id','=',$areaCapacites->first()->plant->unit_id)->first();
-
+        $unit = Unit::where('id','=',Plant::first()->unit_id)->first();
         foreach($areaCapacites as $item){
             $d = new Data();
             $d->id = $item->id;
