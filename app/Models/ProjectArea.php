@@ -18,4 +18,13 @@ class ProjectArea extends Model
     {
         return $this->belongsToMany('App\Models\Kit', 'project_area_kit')->withPivot('name');
     }
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
+    public function area()
+    {
+        return $this->belongsTo('App\Models\Area');
+    }
+
 }

@@ -11,5 +11,10 @@ class Customer extends Model
         'first_name', 'last_name','user_id'
     ];
 
-    public $timestamps = false; 
+    public $timestamps = false;
+    public function name()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+     
 }

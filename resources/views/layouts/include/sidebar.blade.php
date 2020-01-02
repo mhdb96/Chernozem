@@ -136,8 +136,8 @@
                         <span>Birim İşlemleri</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('mac-address*') ? 'active' : '' }}">
-                    <a href="{{ route('mac-address.index') }}">
+                <li class="{{ Request::is('project-area-kit*') ? 'active' : '' }}">
+                    <a href="{{ route('project-area-kit.index') }}">
                         <span>Mac İşlemleri</span>
                     </a>
                 </li>

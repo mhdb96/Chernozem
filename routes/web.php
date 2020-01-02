@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('packet-kit', 'PacketKitController');
 
         
-        Route::resource('mac-address', 'MacAddressController');
+        Route::resource('project-area-kit', 'ProjectAreaKitController');
 
 
 

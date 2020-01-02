@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
+
+use Kreait\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+
+
 class CategoryController extends Controller
 {
     private $route = 'category';
@@ -19,7 +26,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         $categories = Category::all();
         $my_data = array(
             'title' => $this->title,
@@ -105,6 +112,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        
         $category->update(
             $request->only(['name'])
         );
