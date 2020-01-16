@@ -12,9 +12,15 @@ class Customer extends Model
     ];
 
     public $timestamps = false;
+
     public function name()
     {
         return $this->first_name.' '.$this->last_name;
+    }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project');
     }
      
 }

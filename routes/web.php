@@ -14,8 +14,6 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('loginpage');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 
@@ -25,6 +23,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
     Route::post('logout', 'Auth\LoginController@logout')->name('logout'); 
     Route::get('/permission-denied', 'DashboardController@permissionDenied')->name('permission-denied');   
 
@@ -43,11 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('area-capacity', 'AreaCapacityController');
         Route::resource('packet', 'PacketController');
         Route::resource('packet-kit', 'PacketKitController');
-
         
         Route::resource('project-area-kit', 'ProjectAreaKitController');
-
-
 
         Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
         Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');

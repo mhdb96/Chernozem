@@ -27,4 +27,9 @@ class ProjectArea extends Model
         return $this->belongsTo('App\Models\Area');
     }
 
+    public function projectAreaKits()
+    {
+        return $this->hasMany('App\Models\ProjectAreaKit');
+    }
+
 }
