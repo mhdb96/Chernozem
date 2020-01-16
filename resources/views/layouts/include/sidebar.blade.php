@@ -157,7 +157,7 @@
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="{{ route('project.create') }}">Proje Oluştur</a></li>
 
-                @foreach (\App\Models\Project::all() as $project)
+                @foreach (\App\Models\Project::where('customer_id','=',Auth::user()->customer->id)->get() as $project)
                     <li><a href="{{ route('project.show', $project->id) }}">{{ $project->name }}</a></li>
                 @endforeach
 

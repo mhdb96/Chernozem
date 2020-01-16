@@ -2,7 +2,7 @@
 
 @section('title', ' Kit Ekleme Formu')
 
-@section('content-title', 'asd')
+@section('content-title', 'Yeni')
 @section('content-description', 'Kit Ekleme Formu')
 @section('breadcrumb-title', 'Pakete Kit Ekle')
 
@@ -19,7 +19,7 @@
       <div class="box box-primary">
 
         <div class="box-header with-border">
-          <h3 class="box-title">asd Kit Ekleme Formu</h3>
+          <h3 class="box-title">Yeni Kit Ekleme Formu</h3>
         </div>
 
         <form class="form-horizontal" action="{{ route('project.store') }}" method="POST">

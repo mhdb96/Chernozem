@@ -7,7 +7,7 @@
 @section('breadcrumb-title', $input->name)
 
 @section('content')
-<section class="content">
+<section class="content">    
     <div class="row">
         <div class="col-xs-12">
             <canvas id="input-chart" width="800" height="300"></canvas>
@@ -21,6 +21,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase.js"></script>
 <script src="{{ asset('js/firebase.js') }}"></script>
+<script src="{{ asset('js/jquery.flot.js') }}"></script>
+<script src="{{ asset('js/jquery.flot.resize.js') }}"></script>
 
 <script>
     $(document).ready(function() { 
@@ -33,5 +35,5 @@
             drawChart(chart, fetchedData, '{{$input->firebase_code}}', '{{$input->name}}');
         }, 5000);
     });
-</script>
+</script>    
 @endpush 
