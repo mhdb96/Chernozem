@@ -110,12 +110,12 @@ class every5Second extends Command
         $notificationObject->areaName = $projectArea->name;
         $notificationObject->message = $notificationObject->customerName.', '.$notificationObject->projectName.' projesi '.$notificationObject->areaName.' içinde '.$notificationMessage ;
 
-        $last30MinutesNotificationCount = Notification::where([
+        $lastOneHourNotificationCount = Notification::where([
             ['input_id', '=', $inputId],
-            ['created_at', '>', Carbon::now()->addHour(2)],
+            ['created_at', '>', Carbon::now()->subHour(1)],
         ])->get()->count();
 
-        if($last30MinutesNotificationCount == 0) {
+        if($lastOneHourNotificationCount == 0) {
             Notification::create([
                 'customer_id'  => $notificationObject->customerId,
                 'input_id'     => $inputId,  
