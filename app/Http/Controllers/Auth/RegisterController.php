@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/soil';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -52,9 +52,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'string'],
+            'last_name'  => ['required', 'string', 'max:255'],
+            'email'      => ['required', 'string', 'max:255'],
+            'username'   => ['required', 'string', 'max:255', 'unique:users'],
+            'password'   => ['required', 'string'],
         ]);
     }
     public function showRegistrationForm() 
@@ -78,6 +79,7 @@ class RegisterController extends Controller
         $customer = new Customer;
         $customer->first_name = $data['first_name'];
         $customer->last_name = $data['last_name'];
+        $customer->email = $data['email'];
         $customer->user_id = $user->id;   
         $customer->save();     
 

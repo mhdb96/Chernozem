@@ -39,19 +39,23 @@
     <form action="{{ route('register') }}" method="post">
       @csrf
       <div class="form-group has-feedback">
-        <input type="text" name="first_name" class="form-control" placeholder="Ad">
+        <input type="text" name="first_name" class="form-control" placeholder="Ad" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="last_name"class="form-control" placeholder="Soyad">
+        <input type="text" name="last_name"class="form-control" placeholder="Soyad" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" placeholder="Kullanıcı adı">
+        <input type="text" name="username" class="form-control" placeholder="Kullanıcı adı" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+        <input type="email" name="email" class="form-control" placeholder="E-Posta Adresi" required>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
