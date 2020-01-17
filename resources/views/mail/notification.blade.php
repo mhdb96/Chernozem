@@ -1,0 +1,1 @@
+<p>{{ $notification->message }}</p>

@@ -8,7 +8,7 @@ class Customer extends Model
     protected $table = 'customers';
     
     protected $fillable = [
-        'first_name', 'last_name','user_id'
+        'first_name', 'last_name', 'email', 'user_id'
     ];
 
     public $timestamps = false;
@@ -23,4 +23,8 @@ class Customer extends Model
         return $this->hasMany('App\Models\Project');
     }
      
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification');
+    }
 }
