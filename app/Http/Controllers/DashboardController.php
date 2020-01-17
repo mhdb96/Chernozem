@@ -83,7 +83,9 @@ class DashboardController extends Controller
                 array_push($dashboardCountList, $_newItem);
             }
 
-            $notifications = $user->customer->notifications->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()]);
+            $notifications = $user->customer->notifications
+                ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()])
+                ->sortByDesc('created_at');
 
             return view('dashboard-customer', compact('dashboardCountList', 'notifications'));
         }  
