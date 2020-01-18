@@ -17,25 +17,27 @@ var database = firebase.database();
 
 function drawChart(chart, fetchedData, firebaseCode, label) {
     data = [];
-    time = [];
+    timeArray = [];
     dataLength = 1;            
 
     fetchedData.once('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
             value = childSnapshot.val().value;
+            time = childSnapshot.val().time;
             if (value != 0 || firebaseCode == 'Movement') {
                 data.push(value); 
+                timeArray.push(time); 
                 dataLength++; 
             }
-        });
+        });  
 
-        for (let i = 1; i <= dataLength; i++) 
-            time.push(i*5);  
+        if (timeArray.length > 15)
+            timeArray = timeArray.slice(Math.max(timeArray.length - 15, 1));
 
         new Chart(chart, {
             type: 'line',
             data: {
-                labels: time,
+                labels: timeArray,
                 datasets: [{ 
                     data: data,
                     label: label,
@@ -44,7 +46,7 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
                 }]
             }
         });
-    });
+    });    
 }
 
 function onOffSetters(mac_adress, input) {
