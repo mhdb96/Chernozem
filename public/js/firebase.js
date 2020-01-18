@@ -85,8 +85,11 @@ function getSetters(mac_adress, setters, automaticSetters) {
     fetchedSetters.once('value', function(snapshot) {
         for (var i = 0; i < setters.length; i++) {
             setterValue = snapshot.val()[setters[i].value];
-            if(setterValue == 1 || setterValue == 2) {
-                setters[i].checked = setterValue;
+            if(setterValue == 1) {
+                setters[i].checked = false;
+            }
+            else if (setterValue == 2) {
+                setters[i].checked = true;
             }
             else {
                 setters[i].disabled = true;
