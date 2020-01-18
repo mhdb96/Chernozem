@@ -36,6 +36,11 @@ class Packet extends Model
         return $this->belongsToMany('App\Models\Kit','packet_kit')->withPivot('count');
     }
 
+    public function c_kits()
+    {
+        return $this->hasMany('App\Models\PacketKit');
+    }
+
     public function name()
     {
         return $this->name;

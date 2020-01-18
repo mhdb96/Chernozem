@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('control-data', 'AjaxController@controlData')->name('controlData');
         Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
+        Route::get('get-packet-kit-inputs', 'AjaxController@getPacketKitInputs')->name('getPacketKitInputs');
+        
     });
 
     Route::resource('input', 'InputController');
