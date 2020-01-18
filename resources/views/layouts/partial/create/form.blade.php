@@ -36,7 +36,8 @@
       $('.select2').select2();
 
       $("#box-body").on("click", ".remove-button", function(){
-        var t = $(this).offsetParent()[0].parentElement;
+        console.log($(this).offsetParent()[0].parentElement);
+        var t = $(this).offsetParent()[0].parentElement.parentElement;
         t.remove();
         });
       });

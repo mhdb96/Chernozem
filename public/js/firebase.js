@@ -22,7 +22,7 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
 
     fetchedData.once('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
-            value = childSnapshot.val();
+            value = childSnapshot.val().value;
             if (value != 0 || firebaseCode == 'Movement') {
                 data.push(value); 
                 dataLength++; 

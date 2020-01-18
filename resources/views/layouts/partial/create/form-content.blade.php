@@ -37,23 +37,20 @@
             <label for="{{$fillable}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}}</label>
             <div class="col-sm-8">
 
-                <input type={{$fillables_types[$key]}} class="form-control"
-                
-              name="{{$is_multiple ? $fillable.'[]' : $fillable.''}}"
-              id="{{$fillable}}"
-              placeholder="{{$fillables_titles[$key]}} Giriniz" required>
+                <input  type={{$fillables_types[$key]}} class="form-control"                
+                        name="{{$is_multiple ? $fillable.'[]' : $fillable.''}}"
+                        id="{{$fillable}}"
+                        placeholder="{{$fillables_titles[$key]}} Giriniz" required>
             </div>
+                @if($is_multiple && $fillable == end($fillables))
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-block btn-success" style="margin-top: {{ count($fillables) == 1 ? '0' : (count($fillables) - 1 )*(-25)  }}px" id="add-button">
+                            <i class="fa fa-plus"></i> Ekle
+                        </button>
+                    </div>
+                @endif
             @endif
         </div>        
-        @endforeach
-        @if($is_multiple)
-            <div class="form-group">
-                <div class="col-sm-2">
-                    <button type="button" class="btn btn-block btn-success" style="margin-top: -25px" id="add-button">
-                        <i class="fa fa-plus"></i> Ekle
-                    </button>
-                </div>
-            </div>
-        @endif
+        @endforeach        
     </div>
   </div>

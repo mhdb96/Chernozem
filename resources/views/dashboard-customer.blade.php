@@ -20,7 +20,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
                 <i class="fa fa-bullhorn"></i>

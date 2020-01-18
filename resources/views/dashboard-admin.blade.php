@@ -79,7 +79,7 @@
                         ],
                         label: "2019 Yılı Aylık Kullanıcı Sayıları",
                         borderColor: "#00C0EF",
-                        fill: false
+                        fill: true
                     }
                 ]
             }
@@ -102,7 +102,7 @@
                         ],
                         label: "2019 Yılı Aylık Proje Sayıları",
                         borderColor: "#00A65A",
-                        fill: false
+                        fill: true
                     }
                 ]
             }

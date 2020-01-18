@@ -62,25 +62,25 @@ class every5Second extends Command
         $tempretureLimit   = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/TempLimit')->getSnapshot()->getValue();        
 
         while (true) {
-            $gasValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Gas')->getSnapshot()->getValue());
+            $gasValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Gas')->getSnapshot()->getValue())['value'];
             if ($gasValue > $gasLimit) {
                 $message = "gaz değeri olması gerekenden fazla olarak algılandı! Fan çalıştırıldı.";
                 $this->createNotification($message, 'Gas');
             }
 
-            $soilHumidityValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/SoilHumidity')->getSnapshot()->getValue());
+            $soilHumidityValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/SoilHumidity')->getSnapshot()->getValue())['value'];
             if ($soilHumidityValue > $soilHumidityLimit) {
                 $message = "toprak nemi değeri olması gerekenden fazla olarak algılandı! Su pompası çalıştırıldı.";
                 $this->createNotification($message, 'SoilHumidity');
             }
 
-            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue());
+            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue())['value'];
             if ($tempratureValue > $tempretureLimit) {
                 $message = "sıcaklık değeri olması gerekenden fazla olarak algılandı! Fan çalıştırıldı.";
                 $this->createNotification($message, 'Tempreture');
             }
 
-            $movementValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Movement')->getSnapshot()->getValue());
+            $movementValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Movement')->getSnapshot()->getValue())['value'];
             if ($movementValue == 1) {
                 $message = "bir hareket algılandı! Alarm çalıştırıldı.";
                 $this->createNotification($message, 'Movement');
