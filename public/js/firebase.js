@@ -54,20 +54,22 @@ function onOffSetters(mac_adress, input) {
 }
 
 function onOffAutomation(mac_adress, automationInput) {
-    var updates = {};
-    updates[`${mac_adress}/Setters/${automationInput.value}`] = 3;
-    firebase.database().ref().update(updates);
+    var updates = {};    
 
     $('.setters').each( function( index, setter ) {
         if (setter.value == automationInput.value && automationInput.checked == false) {
             setter.checked = false;                        
-            setter.disabled = false;                        
+            setter.disabled = false;    
+            updates[`${mac_adress}/Setters/${automationInput.value}`] = 1;                    
         }
         else if (setter.value == automationInput.value && automationInput.checked == true) {
             setter.checked = false;                        
-            setter.disabled = true;                        
+            setter.disabled = true;          
+            updates[`${mac_adress}/Setters/${automationInput.value}`] = 3;              
         }
     });
+
+    firebase.database().ref().update(updates);
 }
 
 function getSettersValue(data) {
