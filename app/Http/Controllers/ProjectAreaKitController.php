@@ -117,7 +117,8 @@ class ProjectAreaKitController extends Controller
     public function update(Request $request, $id)
     {
         $pak = ProjectAreaKit::find($id);        
-        $pak->mac_adress = $request->mac_adress;        
+        $pak->mac_adress = $request->mac_adress; 
+        $pak->is_online = 1;        
         $pak->save();
 
         return redirect()->route($this->route.'.index');
