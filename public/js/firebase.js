@@ -49,7 +49,7 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
 
 function onOffSetters(mac_adress, input) {
     var updates = {};
-    updates[`${mac_adress}/Setters/${input.value}`] = getBoolean(input.checked);
+    updates[`${mac_adress}/Setters/${input.value}`] = getSettersValue(input.checked);
     firebase.database().ref().update(updates);
 }
 
@@ -70,11 +70,11 @@ function onOffAutomation(mac_adress, automationInput) {
     });
 }
 
-function getBoolean(data) {
+function getSettersValue(data) {
     if(data == true) 
-        return 1;
+        return 2;
     else if(data == false) 
-        return 0;
+        return 1;
 }
 
 function getSetters(mac_adress, setters, automaticSetters) {
