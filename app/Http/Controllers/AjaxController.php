@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\RegionSoil;
 use App\Models\SoilPlant;
 use App\Models\Kit;
+use App\Models\ProjectAreaKit;
 
 class AjaxController extends Controller
 {
@@ -106,5 +107,11 @@ class AjaxController extends Controller
           }
         } 
         return \Response::json($inputs);
+    }
+    public function GetMacCount(Request $request)
+    {   
+        $pak = ProjectAreaKit::where('mac_adress',null)->get();
+        //dd($pak); 
+        return \Response::json(count($pak));
     }
 }

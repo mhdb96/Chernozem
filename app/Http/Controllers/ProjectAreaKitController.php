@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Kreait\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\ProjectAreaKit;
