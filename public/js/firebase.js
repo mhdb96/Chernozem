@@ -24,15 +24,24 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
         snapshot.forEach(function(childSnapshot) {
             value = childSnapshot.val().value;
             time = childSnapshot.val().time;
+
             if (value != 0 || firebaseCode == 'Movement') {
-                data.push(value); 
+                if (firebaseCode == 'SoilHumidity' || firebaseCode == 'Gas') {
+                    var newValue = ((value*100)/1023).toFixed(2);
+                    data.push(newValue);
+                } else {
+                    data.push(value);                     
+                }
+
                 timeArray.push(time); 
-                dataLength++; 
-            }
+                dataLength++;                 
+            }          
         });  
 
-        if (timeArray.length > 15)
+        if (timeArray.length > 15) {
+            data = data.slice(Math.max(data.length - 15, 1));
             timeArray = timeArray.slice(Math.max(timeArray.length - 15, 1));
+        }
 
         new Chart(chart, {
             type: 'line',
