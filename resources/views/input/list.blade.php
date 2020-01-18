@@ -40,7 +40,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel box box-success">
+                <div class="panel box box-primary">
                   <div class="box-header with-border">
                     <h4 class="box-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseActions" class="collapsed" aria-expanded="false">
@@ -50,17 +50,38 @@
                   </div>
                   <div id="collapseActions" class="panel-collapse collapse in" aria-expanded="false">
                     <div class="box-body">
+                      <p><b>Uyarı-1:</b> Kitin otomatik modda çalışması için otomatik modda çalıştırma anahtarını aktif hale getirin.</p>
+                      <p><b>Uyarı-2:</b> Kitin manuel modda çalışması için önce otomatik modu pasif hale getirin ardından manuel modda durdurma veya çalıştırma işlemi yapabilirsiniz.</p>
+                      <table class="table" style="margin-top: 40px;">
+                        <tr>
+                          <th>İşlemler</th>
+                          <th>Manuel (Pasif/Aktif)</th>
+                          <th>Otomatik (Pasif/Aktif)</th>
+                        </tr>
                         @foreach ($actions as $action)                          
-                          <div class="action">
-                            <span class="action-name">
-                              {{ $action->name }}
-                            </span>
-                            <label class="switch">
-                              <input type="checkbox" class="setters" value="{{ $action->firebase_code }}">
-                              <span class="slider round"></span>
-                            </label>
-                          </div>
+                          {{-- <div class="action"> --}}    
+                            <tr>
+                              <td>                        
+                                <span class="action-name">
+                                  {{ $action->name }}
+                                </span>
+                              </td>
+                              <td>
+                                <label class="switch">
+                                  <input type="checkbox" class="setters" value="{{ $action->firebase_code }}">
+                                  <span class="slider round"></span>
+                                </label>
+                              </td> 
+                              <td>
+                                <label class="switch">
+                                  <input type="checkbox" class="automatic_setters" value="{{ $action->firebase_code }}">
+                                  <span class="slider round"></span>
+                                </label>
+                              </td> 
+                            </tr>
+                          {{-- </div> --}}
                         @endforeach
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -83,12 +104,16 @@
 <script>
     $(document).ready(function() {           
         var setters = document.getElementsByClassName("setters");    
+        var automaticSetters = document.getElementsByClassName("automatic_setters");    
 
-        getSetters('{{ $mac_adress }}', setters);
+        getSetters('{{ $mac_adress }}', setters, automaticSetters);
 
         for (var i = 0; i < setters.length; i++) {
           setters[i].addEventListener('click', function() {            
-            updateSetters('{{ $mac_adress }}', this);
+            onOffSetters('{{ $mac_adress }}', this);
+          });
+          automaticSetters[i].addEventListener('click', function() {                    
+            onOffAutomation('{{ $mac_adress }}', this);
           });
         }
     });

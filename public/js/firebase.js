@@ -47,10 +47,27 @@ function drawChart(chart, fetchedData, firebaseCode, label) {
     });
 }
 
-function updateSetters(mac_adress, input) {
+function onOffSetters(mac_adress, input) {
     var updates = {};
     updates[`${mac_adress}/Setters/${input.value}`] = getBoolean(input.checked);
     firebase.database().ref().update(updates);
+}
+
+function onOffAutomation(mac_adress, automationInput) {
+    var updates = {};
+    updates[`${mac_adress}/Setters/${automationInput.value}`] = 3;
+    firebase.database().ref().update(updates);
+
+    $('.setters').each( function( index, setter ) {
+        if (setter.value == automationInput.value && automationInput.checked == false) {
+            setter.checked = false;                        
+            setter.disabled = false;                        
+        }
+        else if (setter.value == automationInput.value && automationInput.checked == true) {
+            setter.checked = false;                        
+            setter.disabled = true;                        
+        }
+    });
 }
 
 function getBoolean(data) {
@@ -60,12 +77,19 @@ function getBoolean(data) {
         return 0;
 }
 
-function getSetters(mac_adress, inputs) {
+function getSetters(mac_adress, setters, automaticSetters) {
     fetchedSetters = firebase.database().ref(`${mac_adress}/Setters`);
 
     fetchedSetters.once('value', function(snapshot) {
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].checked = snapshot.val()[inputs[i].value];
+        for (var i = 0; i < setters.length; i++) {
+            setterValue = snapshot.val()[setters[i].value];
+            if(setterValue == 1 || setterValue == 2) {
+                setters[i].checked = setterValue;
+            }
+            else {
+                setters[i].disabled = true;
+                automaticSetters[i].checked = true;                
+            }            
         }
     });
 }
