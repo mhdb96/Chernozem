@@ -7,7 +7,7 @@ use App\Models\Actuator;
 use App\Models\Action;
 
 
-class Data{
+class ActuatorData{
     public $id;
     public $name;
     public $unit_price;
@@ -33,7 +33,7 @@ class ActuatorController extends Controller
 
         $data = array();
         foreach($actuators as $item){
-            $d = new Data();
+            $d = new ActuatorData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->unit_price = $item->unit_price.'₺';

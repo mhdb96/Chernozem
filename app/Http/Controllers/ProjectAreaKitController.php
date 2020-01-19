@@ -13,7 +13,7 @@ use App\Models\ProjectAreaKit;
 use App\Models\Kit;
 use DB;
 
-class Data{
+class ProjectAreaKitData{
     public $name;
     public $project;
     public $kit;
@@ -39,7 +39,7 @@ class ProjectAreaKitController extends Controller
         $projectAreaKits = ProjectAreaKit::Where('mac_adress','=',null)->get();
         $data = array();
         foreach($projectAreaKits as $item){
-            $d = new Data();
+            $d = new ProjectAreaKitData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->project = $item->projectArea->project->name;

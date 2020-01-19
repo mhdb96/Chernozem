@@ -15,7 +15,7 @@ use App\Models\SoilPlant;
 use App\Models\AreaCapacity;
 use App\Models\Kit;
 
-class Data{
+class PacketData{
     public $name;
     public $soil;
     public $plant;
@@ -51,7 +51,7 @@ class PacketController extends Controller
             $name = $packet->name;
             $id= $packet->id;
 
-            $d = new Data();
+            $d = new PacketData();
             $d->soil = $soil;
             $d->plant = $plant; 
             $d->region = $region; 

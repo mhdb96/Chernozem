@@ -158,7 +158,7 @@
               </span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="{{ route('project.create') }}">Proje Oluştur</a></li>
+                <li><a href="{{ route('project.before-create') }}">Proje Oluştur</a></li>
 
                 @foreach (\App\Models\Project::where('customer_id','=',Auth::user()->customer->id)->get() as $project)
                     <li><a href="{{ route('project.show', $project->id) }}">{{ $project->name }}</a></li>
@@ -186,17 +186,18 @@
 </aside>
 @push('scripts')
 <script>
-  $(document).ready(function() {
-    $.ajax({
-                type:'GET',
-                url:'/get-mac-count',
-                data:{
-                },
-                success:function(data){    
-                    console.log(data);                                       
-                    $('#mac_count').append(data);
-                }
-            });
-  });
+@if (Auth::user()->role->name == 'admin')
+    $(document).ready(function() {
+        $.ajax({
+            type:'GET',
+            url:'/get-mac-count',
+            data:{},
+            success:function(data){    
+                console.log(data);                                       
+                $('#mac_count').append(data);
+            }
+        });
+    });
+@endif
 </script>
 @endpush

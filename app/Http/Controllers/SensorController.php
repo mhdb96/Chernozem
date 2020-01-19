@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sensor;
 use App\Models\Input;
 
-class Data{
+class SensorData{
     public $id;
     public $name;
     public $unit_price;
@@ -32,7 +32,7 @@ class SensorController extends Controller
 
         $data = array();
         foreach($sensors as $item){
-            $d = new Data();
+            $d = new SensorData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->description = $item->description;

@@ -9,7 +9,7 @@ use App\Models\Region;
 use App\Models\Soil;
 use App\Models\RegionSoil;
 
-class Data{
+class RegionData{
     public $id;
     public $name;
     public $soils = array();
@@ -33,7 +33,7 @@ class RegionController extends Controller
 
         $data = array();
         foreach($regions as $item){
-            $d = new Data();
+            $d = new RegionData();
             $d->id = $item->id;
             $d->name = $item->name;
             $array = array();

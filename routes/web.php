@@ -45,23 +45,26 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('packet', 'PacketController');
         Route::resource('packet-kit', 'PacketKitController');
         
-        Route::resource('project-area-kit', 'ProjectAreaKitController');
-
-        Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
-        Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
-        Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
+        Route::resource('project-area-kit', 'ProjectAreaKitController');        
 
         Route::get('control-data', 'AjaxController@controlData')->name('controlData');
         Route::get('get-packet-kit-count', 'AjaxController@getPacketKitCount')->name('getPacketKitCount');
         Route::get('get-packet-kit-inputs', 'AjaxController@getPacketKitInputs')->name('getPacketKitInputs');
         Route::get('get-mac-count', 'AjaxController@getMacCount')->name('getMacCount');
-        
-        
+                
     });
 
     Route::resource('input', 'InputController');
     Route::resource('kit', 'KitController');
 
+    Route::get('project/before-create', 'ProjectController@beforeCreate')->name('project.before-create');
+    // Route::post('project/calculate-budget', 'ProjectController@calculateBudget')->name('project.calculate-budget');
     Route::resource('project', 'ProjectController');
+
     Route::resource('project-area', 'ProjectAreaController');
+
+    Route::get('region-soils', 'AjaxController@getRegionSoils')->name('getRegionSoils');
+    Route::get('soil-plants', 'AjaxController@getSoilPlants')->name('getSoilPlants');
+    Route::get('areas', 'AjaxController@getAreas')->name('getAreas');
+    Route::get('packets', 'AjaxController@getPackets')->name('getPackets');
 });

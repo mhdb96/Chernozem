@@ -8,7 +8,7 @@ use App\Models\Type;
 use App\Models\Category;
 use DB;
 
-class Data{
+class TypeData{
     public $id;
     public $name;
     public $category;
@@ -32,7 +32,7 @@ class TypeController extends Controller
 
         $data =array();
         foreach($types as $item){
-            $d = new Data();
+            $d = new TypeData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->category = $item->category->name;

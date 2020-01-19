@@ -10,7 +10,7 @@ use App\Models\Unit;
 use App\Models\Type;
 
 
-class Data{
+class AreaData{
     public $id;
     public $name;
     public $unit_price;
@@ -36,7 +36,7 @@ class AreaController extends Controller
 
         $data = array();
         foreach($areas as $item){
-            $d = new Data();
+            $d = new AreaData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->unit_price = $item->unit_price.'₺';

@@ -10,7 +10,7 @@ use App\Models\Type;
 use App\Models\RegionSoil;
 use App\Models\SoilPlant;
 
-class Data{
+class PlantData{
     public $id;
     public $name;
     public $unit_price;
@@ -36,7 +36,7 @@ class PlantController extends Controller
         $plants = Plant::all();
         $data = array();
         foreach($plants as $plant){
-            $d = new Data();
+            $d = new PlantData();
             $d->id = $plant->id;
             $d->name = $plant->name;
             $d->unit_price = $plant->unit_price.'₺';

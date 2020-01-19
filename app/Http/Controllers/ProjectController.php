@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Packet;
 use App\Models\Area;
 use App\Models\Project;
+use App\Models\Region;
 
 use Auth;
 
@@ -27,23 +28,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $packets = Packet::all();
         $areas = Area::all();
 
-        return view('project.create', compact('packets', 'areas'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $packet = Packet::find($request->packet_id);
+        $packet_id = $request->packet_id;
+        $packet = Packet::find($packet_id);
         $kits = $packet->kits;
         
         $controllerPrice = 0;
@@ -61,19 +51,47 @@ class ProjectController extends Controller
         }
         
         $packetArea = $packet->area; // areas table
-        $areaPrice = $packetArea->unit_price * $request->area_count; // area_count * area price
+        $areaPrice = $packetArea->unit_price; // area price
         
         $areaCapacity = $packetArea->areaCapacity; // area_capacity table
         $capacity = $areaCapacity->capacity;
         $plantUnitPrice = $areaCapacity->plant->unit_price;
         $plantPrice = $capacity * $plantUnitPrice; // area_capacity * plant price 
 
+        $budget = $controllerPrice + $actuatorPrice + $sensorPrice + $areaPrice + $plantPrice;
+
+        return view('project.create', compact('packet', 'areas', 'budget', 'packet_id'));
+    }
+
+    /**
+     * Show the form for finding project.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function beforeCreate()
+    {
+        $regions = Region::all(); 
+
+        return view('project.before-create', compact('regions'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $packet = Packet::find($request->packet_id);
+        $kits = $packet->kits;
+
         // project store
         $project = new Project;
         $project->name = $request->name;
         $project->start_date = date("Y-m-d H:i:s", strtotime(str_replace('/', '-', $request->start_date)));
         $project->end_date = date("Y-m-d H:i:s", strtotime(str_replace('/', '-', $request->end_date)));
-        $project->budget = $controllerPrice + $actuatorPrice + $sensorPrice + $areaPrice + $plantPrice;
+        $project->budget = $request->budget;
         $project->packet_id = $request->packet_id;  
         $project->customer_id = Auth::user()->customer->id;  
         $project->owns_area = $request->owns_area;

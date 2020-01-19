@@ -8,7 +8,7 @@ use App\Models\Unit;
 use App\Models\Type;
 use DB;
 
-class Data{
+class UnitData{
     public $id;
     public $name;
     public $type;
@@ -32,7 +32,7 @@ class UnitController extends Controller
         
         $data =array();
         foreach($units as $item){
-            $d = new Data();
+            $d = new UnitData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->type = $item->type->name;

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MyController;
 use Illuminate\Support\Facades\DB;
 
-class Data{
+class MyControllerData{
     public $id;
     public $name;
     public $unit_price;
@@ -32,7 +32,7 @@ class MyControllersController extends Controller
 
         $data = array();
         foreach($controllers as $item){
-            $d = new Data();
+            $d = new MyControllerData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->unit_price = $item->unit_price.'₺';

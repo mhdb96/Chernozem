@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Soil;
 use App\Models\RegionSoil;
 
-class Data{
+class SoilData{
     public $id;
     public $name;
     public $fertility;
@@ -29,7 +29,7 @@ class SoilController extends Controller
         $data=array();
 
         foreach($soils as $soil){
-            $d = new Data();
+            $d = new SoilData();
             $d->id = $soil->id;
             $d->name = $soil->name; 
             $d->fertility = $soil->fertility.'%';

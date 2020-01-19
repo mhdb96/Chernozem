@@ -61,6 +61,13 @@ class AjaxController extends Controller
         return $this->formatData($areas);        
     }
 
+    public function getPackets(Request $request)
+    {   
+        $packets = DB::table('packets')->where('area_id', $request->id)->get();
+
+        return $this->formatData($packets);        
+    }
+
     public function controlData(Request $request)
     {   
         $controlData = [];

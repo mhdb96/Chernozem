@@ -10,7 +10,7 @@ use App\Models\Plant;
 use App\Models\Unit;
 
 
-class Data{
+class AreaCapacityData{
     public $id;
     public $capacity;
     public $plant;
@@ -35,7 +35,7 @@ class AreaCapacityController extends Controller
         $data =array();
         $unit = Unit::where('id','=',Plant::first()->unit_id)->first();
         foreach($areaCapacites as $item){
-            $d = new Data();
+            $d = new AreaCapacityData();
             $d->id = $item->id;
             $d->capacity = $item->capacity.' '.$unit->name;
             $d->plant = $item->plant->name;

@@ -10,7 +10,7 @@ use App\Models\MyController;
 use App\Models\Sensor;
 use App\Models\Actuator;
 
-class Data{
+class KitData{
     public $id;
     public $name;
     public $description;
@@ -43,7 +43,7 @@ class KitController extends Controller
 
         $data = array();
         foreach($kits as $item){
-            $d = new Data();
+            $d = new KitData();
             $d->id = $item->id;
             $d->name = $item->name;
             $d->description = $item->description;
