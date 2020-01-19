@@ -11,7 +11,7 @@ class InputController extends Controller
 {
     private $route = 'input';
     private $title = 'Giriş';
-    private $fillables_types = ['text'];
+    private $fillables_types = ['text','text'];
     
     public function __construct()
     {
@@ -30,8 +30,8 @@ class InputController extends Controller
         $my_data = array(
             'title' => 'Giriş',
             'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'fillables' => ['name','firebase_code'],
+            'fillables_titles' => ['İsim','Firebase Kodu'],
             'empty_space' => 1000,
             'data' => $inputs
 
@@ -50,8 +50,8 @@ class InputController extends Controller
         $my_data = array(
             'title' => 'Giriş',
             'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'fillables' => ['name','firebase_code'],
+            'fillables_titles' => ['İsim','Firebase Kodu'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => true
         );
@@ -69,6 +69,7 @@ class InputController extends Controller
             for ($i=0; $i < count($request->name); $i++) {
                 Input::create([
                     'name'      => $request->name[$i],
+                    'firebase_code' => $request->firebase_code[$i],
                 ]);
             }
         return redirect()->route('input.index');
@@ -98,8 +99,8 @@ class InputController extends Controller
         $my_data = array(
             'title' => 'Giriş',
             'route' => 'input',
-            'fillables' => ['name'],
-            'fillables_titles' => ['İsim'],
+            'fillables' => ['name','firebase_code'],
+            'fillables_titles' => ['İsim', 'Firebase Kodu'],
             'fillables_types' => $this->fillables_types,
             'data' => $input
         );
@@ -116,7 +117,7 @@ class InputController extends Controller
     public function update(Request $request, Input $input)
     {
         $input->update(
-            $request->only(['name'])
+            $request->only(['name', 'firebase_code'])
         );
 
         return redirect()->route('input.index');

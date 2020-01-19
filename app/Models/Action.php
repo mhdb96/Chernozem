@@ -8,7 +8,7 @@ class Action extends Model
 {
     protected $table = 'actions';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'firebase_code'];
 
     public $timestamps = false;
 

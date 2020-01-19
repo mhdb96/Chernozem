@@ -11,9 +11,9 @@ class ActionController extends Controller
 {
     private $route = 'action';
     private $title = 'Eylem';
-    private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
-    private $fillables_types = ['text'];
+    private $fillables = ['name', 'firebase_code'];
+    private $fillables_titles = ['Isim','Firebase Kodu'];
+    private $fillables_types = ['text','text'];
 
     /**
      * Display a listing of the resource.
@@ -63,6 +63,7 @@ class ActionController extends Controller
         for ($i=0; $i < count($request->name); $i++) {
             Action::create([
                 'name'      => $request->name[$i],
+                'firebase_code'      => $request->firebase_code[$i],
             ]);
         }
     return redirect()->route($this->route.'.index');
@@ -108,7 +109,7 @@ class ActionController extends Controller
     public function update(Request $request, Action $action)
     {
         $action->update(
-            $request->only(['name'])
+            $request->only(['name', 'firebase_code'])
         );
 
         return redirect()->route($this->route.'.index');

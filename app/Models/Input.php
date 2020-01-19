@@ -8,7 +8,7 @@ class Input extends Model
 {
     protected $table = 'inputs';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'firebase_code'];
 
     public $timestamps = false;
 

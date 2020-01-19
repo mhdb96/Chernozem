@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="kits" class="col-sm-2 control-label">Kitler</label>
                     <div class="col-sm-8">
-                        <select class="form-control select2" multiple name="kits[]" data-placeholder="Kitleri Seçin" style="width: 100%;" required>
+                        <select class="form-control select2" multiple name="kits[]" data-placeholder="Kitleri Seçin" style="width: 100%;">
                             @foreach ($kits as $kit)                                
                                 <option value="{{ $kit->id }}" {{ in_array($kit->id, $selectedKitIds) ? 'selected' : '' }}>{{ $kit->name }}</option>
                             @endforeach
@@ -59,25 +59,60 @@
         if (selectedOptions.length > 0) {
           @foreach($selectedKits as $key => $kit)
             $("#listing-selected-kits").append(`
+            <div id="mykit_{{ $kit->kit_id }}">
                 <div class="form-group" id="kit_{{ $kit->kit_id }}">
                     <label for="counts" class="col-sm-2 control-label">${selectedOptions[ {{ $key }} ].text} - Sayısı</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" name="counts[{{ $kit->kit_id }}]" placeholder="Kit Sayısı" value="{{ $kit->count }}">
                     </div>
-                </div>  
+                </div>
+                @foreach($input_limits[$key] as $kit_limit)
+               
+                <div class="form-group" id="input_{{$kit_limit["id"]}}">
+                            <label for="counts" class="col-sm-2 control-label">{{$kit_limit["name"]}}</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="limits[{{$kit_limit["id"]}}]" value="{{$kit_limit["value"]}}" placeholder="Limit Degeri">
+                            </div>
+                        </div>
+                @endforeach
+            </div>
+            <hr>  
             `);
           @endforeach          
         }
 
         $('[name ="kits[]"]').on("select2:select", function(e) {  
             $("#listing-selected-kits").append(`
+            <div id="mykit_${e.params.data.id}">
                 <div class="form-group" id="kit_${e.params.data.id}">
                     <label for="counts" class="col-sm-2 control-label">${e.params.data.text} - Sayısı</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" name="counts[${e.params.data.id}]" placeholder="Kit Sayısı">
                     </div>
-                </div>  
+                </div> 
+            </div>
             `);
+            $.ajax({
+                type:'GET',
+                url:'/get-packet-kit-inputs',
+                data:{
+                    kit_id: e.params.data.id,
+                },
+                success:function(data){   
+                    console.log(data);
+                    data.forEach(element => {
+                        $(`#mykit_${e.params.data.id}`).append(`
+                        <div class="form-group" id="input_${element.id}">
+                            <label for="counts" class="col-sm-2 control-label">${element.name}</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="limits[${element.id}]" placeholder="Limit Degeri">
+                            </div>
+                        </div>`      
+                        );                           
+                    });
+                    $(`#mykit_${e.params.data.id}`).append(`<hr>`);
+                }
+            }); 
 
             $.ajax({
                 type:'GET',
@@ -94,7 +129,7 @@
         });
 
         $('[name ="kits[]"]').on("select2:unselect", function(e) {  
-            $(`#kit_${e.params.data.id}`)[0].remove();            
+            $(`#mykit_${e.params.data.id}`)[0].remove();            
         });
     });
 </script>

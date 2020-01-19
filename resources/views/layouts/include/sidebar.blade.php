@@ -120,7 +120,7 @@
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
-            <ul class="treeview-menu" style="{{ Request::is('category*') || Request::is('type*') || Request::is('unit*') ? 'display: block' : '' }}">
+            <ul class="treeview-menu" style="{{ Request::is('category*') || Request::is('type*') || Request::is('unit*') || Request::is('project-area-kit*') ? 'display: block' : '' }}">
                 <li class="{{ Request::is('category*') ? 'active' : '' }}">
                     <a href="{{ route('category.index') }}">
                         <span>Kategori İşlemleri</span>
@@ -139,6 +139,9 @@
                 <li class="{{ Request::is('project-area-kit*') ? 'active' : '' }}">
                     <a href="{{ route('project-area-kit.index') }}">
                         <span>Mac İşlemleri</span>
+                        <span class="pull-right-container">                            
+                        <small class="label pull-right bg-green" id="mac_count"></small>                            
+                          </span>
                     </a>
                 </li>
             </ul>
@@ -181,3 +184,19 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+@push('scripts')
+<script>
+  $(document).ready(function() {
+    $.ajax({
+                type:'GET',
+                url:'/get-mac-count',
+                data:{
+                },
+                success:function(data){    
+                    console.log(data);                                       
+                    $('#mac_count').append(data);
+                }
+            });
+  });
+</script>
+@endpush
