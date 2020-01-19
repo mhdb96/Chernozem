@@ -67,7 +67,7 @@
             data: {
             labels: [
                 @foreach($montlyCustomerCount as $count)
-                    {{ $count->month }},
+                    {{ (string)$count->month }},
                 @endforeach
             ],
             datasets: [

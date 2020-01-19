@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Input;
+use App\Models\ProjectAreaKit;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class InputController extends Controller
@@ -84,8 +86,33 @@ class InputController extends Controller
     public function show(Input $input, Request $request)
     {
         $mac_adress = $request->session()->get('mac_adress');
-        
-        return view('input.chart', compact('input', 'mac_adress'));
+        $pak = ProjectAreaKit::where('mac_adress',$mac_adress)->get()->first();
+        //dd($mac_adress);
+        $data;
+        $s = $pak->kit->sensors;
+        $sensorInputId = -1;
+        foreach ($s as $se) {            
+            foreach ($se->inputs as $i) {
+                if($i->id == $input->id) {
+                    $sensorInputId = DB::table('input_sensor')->select('id')->where([['sensor_id',$se->id],['input_id',$i->id]])->get()->first()->id;
+                    //dd($sensorInputId);
+                }
+            }
+        }
+        if($sensorInputId != -1) {
+            //dd($pak->id);
+            $data = DB::table('sensor_input_data')->select('value','created_at')->where([['project_area_kit_id',$pak->id],['sensor_input_id',$sensorInputId]])->get();
+        }
+        $time = array();
+        $values = array();
+        foreach ($data as $d) {
+            $t = Str::before($d->created_at, ' ');
+           
+            array_push($time, $t);
+            array_push($values, $d->value);
+        }
+        //dd($time);
+        return view('input.chart', compact('input', 'mac_adress','time','values'));
     }
 
     /**
