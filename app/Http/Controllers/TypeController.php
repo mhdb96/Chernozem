@@ -17,9 +17,9 @@ class TypeData{
 class TypeController extends Controller
 {
     private $route = 'type';
-    private $title = 'tip';
+    private $title = 'Tip';
     private $fillables = ['name','category'];
-    private $fillables_titles = ['Isim','Kategori'];
+    private $fillables_titles = ['İsim','Kategori'];
     private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
@@ -65,7 +65,7 @@ class TypeController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name', $categories],
-            'fillables_titles' => ['Isim','Kategoriler'],
+            'fillables_titles' => ['İsim','Kategori'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -113,7 +113,7 @@ class TypeController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name',[$categories, $insertedCategoryIds] ],
-            'fillables_titles' => ['Isim','Kategoriler'],  
+            'fillables_titles' => ['İsim','Kategori'],  
             'fillables_types' => $this->fillables_types,          
             'data' => $type
         );

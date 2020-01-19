@@ -24,7 +24,7 @@ class KitController extends Controller
     private $route = 'kit';
     private $title = 'Kit';
     private $fillables = ['name','description','sensors','actuators','myController'];
-    private $fillables_titles = ['Isim','Aciklama','Sensötler','Eyleyiciler','Kontroller'];
+    private $fillables_titles = ['İsim','Açıklama','Sensörler','Eyleyiciler','Denetleyici'];
     private $fillables_types = ['text','text','many','many','one'];
 
     public function __construct()
@@ -51,11 +51,11 @@ class KitController extends Controller
 
             $sensor_array = array();
             $actuators_array = array();
-            foreach($item->sensors as $sensor){
-                array_push($sensor_array, $sensor->name);
+            foreach($item->sensors as $key => $sensor){
+                array_push($sensor_array, ++$key.' - '.$sensor->name);
             }
-            foreach($item->actuators as $actuator){
-                array_push($actuators_array, $actuator->name);
+            foreach($item->actuators as $key => $actuator){
+                array_push($actuators_array, ++$key.' - '.$actuator->name);
 
             }
             //array_push($d->soil,$array);
@@ -97,7 +97,7 @@ class KitController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description', $sensors, $actuators, $controllers],
-            'fillables_titles' => ['Isim','Aciklama','Sensorler', 'Eyleyiciler', 'Kontrolorler'],
+            'fillables_titles' => ['İsim','Açıklama','Sensör', 'Eyleyici', 'Denetleyici'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -189,7 +189,7 @@ class KitController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description', [$sensors, $insertedSensorIds], [$actuators, $insertedActuatorIds], [$controllers, $insertedControllerIds]],
-            'fillables_titles' => ['Isim','Aciklama','Sensorler','Eyleyiciler','Kontrolor'],  
+            'fillables_titles' => ['İsim','Açıklama','Sensör', 'Eyleyici', 'Denetleyici'], 
             'fillables_types' => $this->fillables_types,          
             'data' => $kit
         );

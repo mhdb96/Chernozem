@@ -16,7 +16,7 @@
             @elseif($fillables_types[$key] == 'one')           
             <label for="{{$fillable->first()->getTable()}}" class="col-sm-2 control-label">{{$fillables_titles[$key]}} Türleri</label>
             <div class="col-sm-8">
-                  <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türlerini Seçin" style="width: 100%;" required>
+                  <select class="form-control select2" name="{{$fillable->first()->getTable()}}" data-placeholder="{{$fillables_titles[$key]}} Türünü Seçin" style="width: 100%;" required>
                     <option></option>                    
                     @foreach ($fillable as $item)                    
                       <option value="{{ $item->id }}">{{ $item->name() }}</option>

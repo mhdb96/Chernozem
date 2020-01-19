@@ -27,7 +27,7 @@ class ProjectAreaKitController extends Controller
     private $route = 'project-area-kit';
     private $title = 'Mac';
     private $fillables = ['name','project','customer','kit'];
-    private $fillables_titles = ['Isim','Proje Adı','Musteri','Kit Adı'];
+    private $fillables_titles = ['İsim', 'Proje Adı', 'Musteri', 'Kit Adı'];
     private $fillables_types = ['text'];
     /**
      * Display a listing of the resource.

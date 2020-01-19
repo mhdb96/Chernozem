@@ -18,7 +18,7 @@ class CategoryController extends Controller
     private $route = 'category';
     private $title = 'Kategori';
     private $fillables = ['name'];
-    private $fillables_titles = ['Isim'];
+    private $fillables_titles = ['İsim'];
     private $fillables_types = ['text'];
     /**
      * Display a listing of the resource.

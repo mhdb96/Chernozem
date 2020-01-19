@@ -12,7 +12,7 @@ class ActionController extends Controller
     private $route = 'action';
     private $title = 'Eylem';
     private $fillables = ['name', 'firebase_code'];
-    private $fillables_titles = ['Isim','Firebase Kodu'];
+    private $fillables_titles = ['İsim','Firebase Kodu'];
     private $fillables_types = ['text','text'];
 
     /**

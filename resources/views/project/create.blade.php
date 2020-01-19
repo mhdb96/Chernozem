@@ -118,21 +118,22 @@
 
         $('#listing-area').empty();
 
-        var areaCount = $('#area_count')[0].value;
-        if(isNaN(areaCount)) 
-            $('#budget')[0].value = $('#budget')[0].value*areaCount;        
+        var areaCount = parseInt($('#area_count')[0].value);
+        if(Number.isInteger(areaCount)) {
+            $('#budget')[0].value = {{ $budget }}*areaCount;        
         
-        for (let i = 1; i <= areaCount; i++) {
-        $('#listing-area').append(`
-                <div class="form-group">
-                    <label for="counts" class="col-sm-2 control-label">Sera - ${i}</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" name="area_names[]" placeholder="Saha Adı">
-                    </div>
-                </div>  
-            `);            
+            for (let i = 1; i <= areaCount; i++) {
+            $('#listing-area').append(`
+                    <div class="form-group">
+                        <label for="counts" class="col-sm-2 control-label">Sera - ${i}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="area_names[]" placeholder="Saha Adı">
+                        </div>
+                    </div>  
+                `);            
+            }
+            $('.select2').select2();
         }
-        $('.select2').select2();
     });
     
 </script>

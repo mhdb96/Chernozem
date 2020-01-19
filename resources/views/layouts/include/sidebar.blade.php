@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <img src="{{ asset('dist/img/avatar.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">            
             @if(Auth::user()->role->name == 'admin')
@@ -99,7 +99,7 @@
             </li>
             <li class="{{ Request::is('sensor*') ? 'active' : '' }}">
                 <a href="{{ route('sensor.index') }}">
-                    <span>Sensor İşlemleri</span>
+                    <span>Sensör İşlemleri</span>
                 </a>
             </li>
             <li class="{{ Request::is('actuator*') ? 'active' : '' }}">
@@ -109,7 +109,7 @@
             </li>
             <li class="{{ Request::is('controller*') ? 'active' : '' }}">
                 <a href="{{ route('controller.index') }}">
-                    <span>Kontrolor İşlemleri</span>
+                    <span>Denetleyici İşlemleri</span>
                 </a>
             </li>
           </ul>
@@ -150,18 +150,22 @@
         @endif
 
         @if(Auth::user()->role->name == 'customer')
-        <li class="treeview">
+        <li class="treeview {{ Request::is('project*') ? 'menu-open' : '' }}">
             <a href="#">
               <i class="fa fa-edit"></i> <span>Proje İşlemleri</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="{{ route('project.before-create') }}">Proje Oluştur</a></li>
+            <ul class="treeview-menu" style="{{ Request::is('project*') ? 'display: block' : '' }}">
+                <li class="{{ Request::is('project/before-create') || Request::is('project/create') ? 'active' : '' }}">
+                    <a href="{{ route('project.before-create') }}">Proje Oluştur</a>
+                </li>
 
                 @foreach (\App\Models\Project::where('customer_id','=',Auth::user()->customer->id)->get() as $project)
-                    <li><a href="{{ route('project.show', $project->id) }}">{{ $project->name }}</a></li>
+                    <li>
+                        <a href="{{ route('project.show', $project->id) }}">{{ $project->name }}</a>
+                    </li>
                 @endforeach
 
             </ul>

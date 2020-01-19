@@ -17,9 +17,9 @@ class SensorData{
 class SensorController extends Controller
 {
     private $route = 'sensor';
-    private $title = 'Sensor';
+    private $title = 'Sensör';
     private $fillables = ['name','description','unit_price','inputs'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat','Girişler'];
+    private $fillables_titles = ['İsim','Açıklama','Fiyat','Girişler'];
     private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
@@ -72,7 +72,7 @@ class SensorController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', $inputs],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Girisler'],
+            'fillables_titles' => ['İsim', 'Açıklama', 'Fiyat', 'Giriş'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );
@@ -124,7 +124,7 @@ class SensorController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', [$inputs, $insertedInputIds]],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Girisler'],
+            'fillables_titles' => ['İsim', 'Açıklama', 'Fiyat', 'Giriş'],
             'fillables_types' => $this->fillables_types,
             'data' => $sensor
         );

@@ -21,9 +21,9 @@ class AreaCapacityController extends Controller
 {
     private $route = 'area-capacity';
     private $title = 'Saha Kapasite';
-    private $fillables = ['capacity','plant','area'];
-    private $fillables_titles = ['Kapasite','Bitki','Saha'];
-    private $fillables_types = ['number','one','one'];
+    private $fillables = ['area', 'plant', 'capacity'];
+    private $fillables_titles = ['Saha','Bitki','Kapasite'];
+    private $fillables_types = ['one','one','number'];
     /**
      * Display a listing of the resource.
      *
@@ -71,8 +71,8 @@ class AreaCapacityController extends Controller
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['capacity',$areas, $plants],
-            'fillables_titles' => ['Kapasite','Sahalar','Bitkiler'],
+            'fillables' => [$areas, $plants, 'capacity'],
+            'fillables_titles' => ['Saha', 'Bitki', 'Kapasite'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -126,8 +126,8 @@ class AreaCapacityController extends Controller
         $my_data = array(
             'title' => $this->title,
             'route' => $this->route,
-            'fillables' => ['capacity',[$plants, $insertedPlantIds], [$areas, $insertedAreaIds] ],
-            'fillables_titles' => ['Kapasite','Bitkiler','Sahalar'],  
+            'fillables' => [[$areas, $insertedAreaIds],[$plants, $insertedPlantIds], 'capacity' ],
+            'fillables_titles' => ['Sahalar','Bitkiler','Kapasite'],  
             'fillables_types' => $this->fillables_types,          
             'data' => $areaCapacity
         );

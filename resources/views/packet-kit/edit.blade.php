@@ -69,7 +69,7 @@
                 @foreach($input_limits[$key] as $kit_limit)
                
                 <div class="form-group" id="input_{{$kit_limit["id"]}}">
-                            <label for="counts" class="col-sm-2 control-label">{{$kit_limit["name"]}}</label>
+                            <label for="counts" class="col-sm-2 control-label">{{$kit_limit["name"]}} Değeri</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" name="limits[{{$kit_limit["id"]}}]" value="{{$kit_limit["value"]}}" placeholder="Limit Degeri">
                             </div>

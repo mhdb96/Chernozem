@@ -28,10 +28,13 @@ class PacketController extends Controller
 {
     private $route = 'packet';
     private $title = 'Paket';
-    private $fillables = ['name','soil','plant','region','area'];
-    private $fillables_titles = ['Isim','Toprak','Bitki','Iklim','Saha'];
+    // private $fillables = ['name','soil','plant','region','area'];
+    // private $fillables_titles = ['Isim','Toprak','Bitki','Iklim','Saha'];
+    // private $fillables_types = ['text','one','auto','auto','auto'];
+
+    private $fillables = ['name','region','soil','plant','area'];
+    private $fillables_titles = ['İsim','İklim','Toprak','Bitki','Saha'];
     private $fillables_types = ['text','one','auto','auto','auto'];
-    //['Isim','Iklimler','Topraklar','Bitkiler','Sahalar'
     /**
      * Display a listing of the resource.
      *
@@ -100,7 +103,7 @@ class PacketController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name',$regions, $regionSoil, $soilPlant, $areas],
-            'fillables_titles' => ['Isim','Iklim','Toprak','Bitki','Sahalar'],
+            'fillables_titles' => ['İsim','İklim','Toprak','Bitki','Saha'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -180,7 +183,7 @@ class PacketController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name',[$regions, $insertedRegionIds], [$soils, $insertedsoilIds], [$plants, $insertedPlantIds],  [$areas, $insertedAreaIds]],
-            'fillables_titles' => ['Isim','Iklimler','Topraklar','Bitkiler','Sahalar'],  
+            'fillables_titles' => ['İsim','İklimler','Topraklar','Bitkiler','Saha'],  
             'fillables_types' => $this->fillables_types,          
             'data' => $packet
         );        

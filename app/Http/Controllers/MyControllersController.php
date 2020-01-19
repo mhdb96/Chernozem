@@ -17,9 +17,9 @@ class MyControllerData{
 class MyControllersController extends Controller
 {
     private $route = 'controller';
-    private $title = 'Kontrolor';
+    private $title = 'Denetleyici';
     private $fillables = ['name','description','unit_price'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat'];
+    private $fillables_titles = ['İsim','Açıklama','Fiyat'];
     private $fillables_types = ['text','text','number'];
     /**
      * Display a listing of the resource.

@@ -24,7 +24,7 @@ class PlantController extends Controller
     private $route = 'plant';
     private $title = 'Bitki';
     private $fillables = ['name','unit_price','type','unit','regions'];
-    private $fillables_titles = ['Isim','Fiyat','Tip','Birim','İklim ve Toprak Türleri'];
+    private $fillables_titles = ['İsim','Fiyat','Türü','Birim','İklim ve Toprak Türleri'];
     private $fillables_types = ['text','number','one','one','many'];
     /**
      * Display a listing of the resource.
@@ -81,7 +81,7 @@ class PlantController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price' ,$types, $units, $regionSoils],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Birim','Iklim Topraklari'],
+            'fillables_titles' => ['İsim','Fiyat','Bitki','Ölçü','İklim ve Toprak'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -146,7 +146,7 @@ class PlantController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price',[$types, $insertedTypesIds], [$units, $insertedUnitIds], [$regionSoils, $insertedRegionSoilIds] ],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Uniteler','Iklim Topraklari'],  
+            'fillables_titles' => ['İsim','Fiyat','Bitki','Ölçü','İklim ve Toprak'], 
             'fillables_types' => $this->fillables_types,          
             'data' => $plant
         );

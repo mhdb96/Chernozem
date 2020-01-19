@@ -21,7 +21,7 @@ class RegionController extends Controller
     private $title = 'İklim';
     private $fillables_types = ['text','many'];
     private $fillables = ['name','soils'];
-    private $fillables_titles = ['İsim','Topraklar'];
+    private $fillables_titles = ['İklim Adı','Topraklar'];
     /**
      * Display a listing of the resource.
      *
@@ -69,10 +69,10 @@ class RegionController extends Controller
         if(count($soils) == 0)
             return redirect()->route('soil.create');
         $my_data = array(
-            'title' => 'Iklim',
+            'title' => 'İklim',
             'route' => 'region',
             'fillables' => ['name', $soils],
-            'fillables_titles' => ['name','Topraklar'],
+            'fillables_titles' => ['İklim Adı','Toprak'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );

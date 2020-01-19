@@ -20,7 +20,7 @@ class ActuatorController extends Controller
     private $route = 'actuator';
     private $title = 'Eyleyici';
     private $fillables = ['name','description','unit_price','actions'];
-    private $fillables_titles = ['Isim','Aciklama','Fiyat','Eylemler'];
+    private $fillables_titles = ['İsim','Açıklama','Fiyat','Eylemler'];
     private $fillables_types = ['text','text','number','many'];
     /**
      * Display a listing of the resource.
@@ -74,7 +74,7 @@ class ActuatorController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', $actions],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Eyleyiciler'],
+            'fillables_titles' => ['İsim','Açıklama','Fiyat', 'Eyleyici'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );
@@ -126,7 +126,7 @@ class ActuatorController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','description','unit_price', [$actions, $insertedActionIds]],
-            'fillables_titles' => ['Isim','Aciklama','Fiyat', 'Eyleyiciler'],
+            'fillables_titles' => ['İsim','Açıklama','Fiyat', 'Eyleyici'],
             'fillables_types' => $this->fillables_types,
             'data' => $actuator
         );

@@ -19,7 +19,7 @@ class UnitController extends Controller
     private $route = 'unit';
     private $title = 'Birim';
     private $fillables = ['name','type'];
-    private $fillables_titles = ['Isim','Tip'];
+    private $fillables_titles = ['İsim','Tip'];
     private $fillables_types = ['text','one'];
     /**
      * Display a listing of the resource.
@@ -67,7 +67,7 @@ class UnitController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name', $types],
-            'fillables_titles' => ['Isim','Tipler'],
+            'fillables_titles' => ['İsim','Tipler'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -117,7 +117,7 @@ class UnitController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name',[$types, $insertedTypesIds]],
-            'fillables_titles' => ['Isim','Tipler'],  
+            'fillables_titles' => ['İsim','Tipler'],  
             'fillables_types' => $this->fillables_types,          
             'data' => $unit
         );

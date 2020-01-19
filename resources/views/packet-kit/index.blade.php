@@ -21,7 +21,7 @@
                 <th style="width: 35px">#</th>
                 <th style="width: 200px">Paket Adı</th>
                 <th style="width: 200px;">Kitler</th>
-                <th>Sayısı</th>
+                <th>Kit Sayısı</th>
 
                 <th style="width: 100px;"></th>
               </tr>

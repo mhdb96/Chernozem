@@ -23,7 +23,7 @@ class AreaController extends Controller
     private $route = 'area';
     private $title = 'Saha';
     private $fillables = ['name','unit_price','type','unit'];
-    private $fillables_titles = ['Isim','Fiyat','Tip','Birim'];
+    private $fillables_titles = ['İsim','Fiyat','Türü','Birim'];
     private $fillables_types = ['text','number','one','one'];
     /**
      * Display a listing of the resource.
@@ -74,7 +74,7 @@ class AreaController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price' ,$types, $units],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Birim'],
+            'fillables_titles' => ['İsim','Fiyat','Saha','Birim'],
             'fillables_types' => $this->fillables_types,
             'is_multiple' => false
         );        
@@ -134,7 +134,7 @@ class AreaController extends Controller
             'title' => $this->title,
             'route' => $this->route,
             'fillables' => ['name','unit_price',[$types, $insertedTypesIds], [$units, $insertedUnitIds] ],
-            'fillables_titles' => ['Isim','Fiyat','Tipler','Uniteler'],  
+            'fillables_titles' => ['İsim','Fiyat','Saha','Birim'], 
             'fillables_types' => $this->fillables_types,          
             'data' => $area
         );
