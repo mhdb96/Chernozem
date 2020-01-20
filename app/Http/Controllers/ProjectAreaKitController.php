@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\ProjectAreaKit;
 use App\Models\Kit;
+use App\Models\PacketKit;
 use DB;
 
 class ProjectAreaKitData{
@@ -123,9 +124,25 @@ class ProjectAreaKitController extends Controller
     {
         $pak = ProjectAreaKit::find($id);        
         $pak->mac_adress = $request->mac_adress; 
-        $pak->is_online = 1;        
+        $pak->is_online = 1;
+        
+        $packetId = $pak->projectArea->project->packet->id;
+        $kitId = $pak->kit->id;
+        $packetKit = PacketKit::where([['packet_id',$packetId],['kit_id',$kitId]])->get()->first();        
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/nodemcu-test-2161a-f457b052328a.json');
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://nodemcu-test-2161a.firebaseio.com/')
+            ->createDatabase();    
+        foreach ($packetKit->input_limits as $limit) {            
+            $firebase->getReference($pak->mac_adress.'/Automation//'.$limit->firebase_code.'Limit')->set(
+                $limit->getOriginal('pivot_value')
+            );        
+        }
+        $firebase->getReference($pak->mac_adress.'/Automation/AControl')->set(
+            0
+        );                            
         $pak->save();
-
         return redirect()->route($this->route.'.index');
     }
 

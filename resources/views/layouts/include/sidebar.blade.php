@@ -197,7 +197,7 @@
             url:'/get-mac-count',
             data:{},
             success:function(data){    
-                console.log(data);                                       
+                //console.log(data);                                       
                 $('#mac_count').append(data);
             }
         });
