@@ -25,9 +25,10 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition register-page" cz-shortcut-listen="true" style="">
+<body class="hold-transition register-page" cz-shortcut-listen="true" style="background: url({{ asset('dist/img/bac.jpg') }}) no-repeat center center/cover; height: 100vh;">
 <div class="register-box">
-  <div class="register-logo">
+  <div class="register-logo" style="font-weight: 400;">
+    <img src="{{ asset('dist/img/logo.png') }}" alt="" style="width:60px;height:60px;">
     Chernozem
   </div>
 
