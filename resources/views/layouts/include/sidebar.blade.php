@@ -30,7 +30,7 @@
         
         @if(Auth::user()->role->name == 'admin')
         <li class="treeview {{ Request::is('soil*') || Request::is('region*') || Request::is('packet*') || Request::is('plant*') || Request::is('area*') ||  Request::is('area-capacity*') ? 'menu-open' : '' }}">
-            <a href="#"><i class="fa fa-link"></i> <span>Paketlerimiz</span>
+            <a href="#"><i class="fa fa-cubes"></i> <span>Paketlerimiz</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -76,7 +76,7 @@
             </ul>
           </li>
         <li class="treeview {{ Request::is('kit*') || Request::is('input*') || Request::is('action*') || Request::is('sensor*') || Request::is('actuator*') || Request::is('controller*') ? 'menu-open' : '' }}">
-          <a href="#"><i class="fa fa-link"></i> <span>Kitlerimiz</span>
+          <a href="#"><i class="fa fa-cogs"></i> <span>Kitlerimiz</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -115,7 +115,7 @@
           </ul>
         </li>
         <li class="treeview {{ Request::is('category*') || Request::is('type*') || Request::is('unit*') ? 'menu-open' : '' }}">
-            <a href="#"><i class="fa fa-link"></i> <span>Diger</span>
+            <a href="#"><i class="fa fa-flag"></i> <span>Diger</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>

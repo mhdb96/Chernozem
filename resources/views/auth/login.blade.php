@@ -4,6 +4,7 @@
   <title>Chernozem | Giriş Yap</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" href="{{asset('dist/img/logo.png')}}" type="image/icon type" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -25,9 +26,9 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page" cz-shortcut-listen="true" style="background: url({{ asset('dist/img/bac.jpg') }}) no-repeat center center/cover; height: 100vh;">
+<body class="hold-transition login-page" cz-shortcut-listen="true" style="background: url({{ asset('dist/img/bac.jpg') }}) no-repeat center center/cover;">
 <div class="login-box">
-  <div class="login-logo" style="font-weight: 400;">
+  <div class="login-logo" style="font-weight: 400; color:white;">
     <img src="{{ asset('dist/img/logo.png') }}" alt="" style="width:60px;height:60px;">
     Chernozem
   </div>
