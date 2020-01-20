@@ -138,7 +138,10 @@ class ProjectAreaKitController extends Controller
             $firebase->getReference($pak->mac_adress.'/Automation//'.$limit->firebase_code.'Limit')->set(
                 $limit->getOriginal('pivot_value')
             );        
-        }                    
+        }
+        $firebase->getReference($pak->mac_adress.'/Automation/AControl')->set(
+            0
+        );                            
         $pak->save();
         return redirect()->route($this->route.'.index');
     }
