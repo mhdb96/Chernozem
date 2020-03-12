@@ -58,8 +58,9 @@ class every5Second extends Command
             ->createDatabase();
 
         $gasLimit          = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/GasLimit')->getSnapshot()->getValue();
-        $soilHumidityLimit = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/SoilHumLimit')->getSnapshot()->getValue();
-        $tempretureLimit   = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/TempLimit')->getSnapshot()->getValue();        
+        $soilHumidityLimit = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/SoilHumidityLimit')->getSnapshot()->getValue();
+        $tempretureLimit   = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/TempretureLimit')->getSnapshot()->getValue();   
+
 
         while (true) {
             $gasValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Gas')->getSnapshot()->getValue())['value'];
@@ -74,7 +75,7 @@ class every5Second extends Command
                 $this->createNotification($message, 'SoilHumidity');
             }
 
-            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue())['value'];
+            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue())['value'];            
             if ($tempratureValue > $tempretureLimit) {
                 $message = "sıcaklık değeri olması gerekenden fazla olarak algılandı! Fan çalıştırıldı.";
                 $this->createNotification($message, 'Tempreture');
