@@ -522,6 +522,36 @@ Müşterinin aktif olmayan kitleri listelenmektedir. Kitlerin aktif olması içi
 
 ---
 
+## 🙌 Prototype Circuit Design
+
+<p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image099.png" width="800"></p>
+
+[Back To The Top](#chernozem)
+
+---
+
+## 🙌 Prototype Photos
+
+### **Overview**
+
+<p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image101.jpg" width="800"></p>
+
+### **Controllers**
+
+<p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image103.jpg" width="800"></p>
+
+### **Actuaors**
+
+<p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image105.jpg" width="800"></p>
+
+### **Cable Management**
+
+<p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image107.jpg" width="800"></p>
+
+[Back To The Top](#chernozem)
+
+---
+
 ## 🙌 Developers' Info
 
 -   **Muhammed Bedavi** ~ [Linkedin 🔗](https://www.linkedin.com/in/mhdb96/) - [GitHub 🔗](https://github.com/mhdb96)
