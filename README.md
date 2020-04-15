@@ -44,7 +44,7 @@ allows customers to buy the suggested hardware and monitor it.
 
 Chernozem projesi Türkiye’de gerçekleştirilen tarıma destek vermek için geliştirilmiş bir projedir. Bu raporda projenin sahip olduğu ve ileride olacağı temel özelliklerden bahsedilmektedir. Projemiz şimdilik panel ve prototip olmak üzere iki kısımdan oluşmaktadır. Panel kısmı HTML, CSS, PHP dilleri ve Laravel Framework’ü kullanılarak geliştirilmiş bir web uygulamasıdır. Prototip kısmı ise Arduino Uno ve birkaç sensör kullanılarak gerçekleştirilmiştir. Ayrıca veri tabanı olarak da panelde kullanılacak veriler için MySQL, Arduino’nun iletişimi ve verileri işlemesi için kullanacağımız veri tabanını ise FireBase olarak belirledik. Proje ismini ise kara toprak olarak da tanınan, dünyanın en verimli toprağı olan ve ülkemizde de oldukça bulunan toprağın isminin ingilizce karşılığını kullanmak istedik ve sloganımız şöyle ki: “Toprağınız ne olursa olsun teknolojilerimizle Chernozem verimliliğini elde edeceksiniz”.
 
-## For more info about the project check out the [**detailed description**](https://github.com/mhdb96/Chernozem/blob/master/ProjectDetails.md)
+## For more info about the project check out the [**detailed description**](https://github.com/mhdb96/Chernozem/blob/master/ProjectDetails.md#problemin-tan%C4%B1m%C4%B1)
 
 [Back To The Top](#chernozem)
 
@@ -64,7 +64,7 @@ Proje işlemleri ve kontrol paneli seçeneklerini olduğu ekrandır. Müşterini
 
 Müşteri yeni proje oluşturması için proje ismi, başlangıç ve bitiş tarihi, paketler, arazinin müşteriye mi ait yoksa kira mı olduğunu ve saha sayısı gibi veriler gereklidir.
 
-<a href="https://github.com/mhdb96/Chernozem/blob/master/UITutorial.md"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/cover.jpg" width="800"></a>
+<a href="https://github.com/mhdb96/Chernozem/blob/master/UITutorial.md#M%C3%BC%C5%9Fteri-Aray%C3%BCz%C3%BC"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/cover.jpg" width="800"></a>
 
 [Back To The Top](#chernozem)
 
