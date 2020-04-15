@@ -88,7 +88,7 @@ Müşteri yeni proje oluşturması için proje ismi, başlangıç ve bitiş tari
 
 <p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image103.jpg" width="800"></p>
 
-### **Actuaors**
+### **Actuators**
 
 <p align="center"><img src="https://raw.githubusercontent.com/mhdb96/Chernozem/master/UI%20Tutorial/image105.jpg" width="800"></p>
 
