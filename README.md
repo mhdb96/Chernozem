@@ -13,7 +13,7 @@
 -   [UI](#ui)
 -   [Prototype Circuit Design](#prototype-circuit-design)
 -   [Prototype Photos](#prototype-photos)
--   [Developers' Info](#developers'-info)
+-   [Developers' Info](#developers-info)
 
 ---
 
