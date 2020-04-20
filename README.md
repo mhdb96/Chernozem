@@ -12,8 +12,9 @@ description: IOT Smart Farming Platform
 | :--- | :--- |
 | 1 | [Project Details](project-details/) |
 | 2 | [UI Tutorial](ui-tutorial/) |
-| 3 | [Prototype Circuit Design](prototype-circuit-design.md) |
-| 4 | [Prototype Photos](prototype-photos.md) |
+| 3 | [ER Diagram](er-diagram.md) |
+| 4 | [Prototype Circuit Design](prototype-circuit-design.md) |
+| 5 | [Prototype Photos](prototype-photos.md) |
 
 ## Description
 
