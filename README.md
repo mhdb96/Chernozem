@@ -4,6 +4,8 @@ description: IOT Smart Farming Platform
 
 # Chernozem
 
+![](.gitbook/assets/logo.png)
+
 ## Table of Contents
 
 | \# | Title |
