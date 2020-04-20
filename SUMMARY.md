@@ -13,3 +13,7 @@
 * [Prototype Circuit Design](prototype-circuit-design.md)
 * [Prototype Photos](prototype-photos.md)
 
+## About Us
+
+* [🎆 Our Other Projects](https://projects.xdebuggers.com/)
+
