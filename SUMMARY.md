@@ -10,6 +10,7 @@
 * [UI Tutorial](ui-tutorial/README.md)
   * [User UI](ui-tutorial/user-ui.md)
   * [Admin UI](ui-tutorial/admin-ui.md)
+* [ER Diagram](er-diagram.md)
 * [Prototype Circuit Design](prototype-circuit-design.md)
 * [Prototype Photos](prototype-photos.md)
 
