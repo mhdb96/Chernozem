@@ -1,62 +1,62 @@
 # Platform Açıklaması
 
-### **PAKET**
+## **PAKET**
 
 Oluşturulmuş paketleri gösterildiği bölümdür. Paketler bitkiye göre belirlenmektedir. Paket bünyesinde isim, toprak, bitki, iklim, saha barındırır.
 
-#### **Paket İşlemleri**
+### **Paket İşlemleri**
 
 Paketlerin oluşturulduğu güncelleme, silme ve listeleme yapıldığı kısımdır. Bu bölümde paket ismi, toprak, bitki, iklim, saha işlemleri listelenir.
 
-#### **Paketlere Kit Ekle**
+### **Paketlere Kit Ekle**
 
 Kitlerimiz bölümde oluşturduğumuz kitlerden uygun olanları gerekli sayıda eklendiği bölümdür ayrıca paketteki var olan kiti de buradan silebiliriz.
 
-#### **Toprak İşlemleri**
+### **Toprak İşlemleri**
 
 Paketlerde toprak değeri eklenmektedir. Bu toprakların isimlerinin ve verimliklerinin eklendiği, silindiği veya var olan toprağın güncellendiği bölümdür.
 
-#### **İklim İşlemleri**
+### **İklim İşlemleri**
 
 Paketlerde iklim değeri eklenmektedir. İklimler eklenirken hangi toprakları barındırdığı da eklenmelidir. Bu bölümde iklime ekleme, silme, güncelleme ve listeleme işlemeleri yapılmaktadır.
 
-#### **Bitki İşlemleri**
+### **Bitki İşlemleri**
 
 Bitki türlerinin eklendiği, güncellendiği, silindiği ve listelendiği bölümdür. Bu bölümde bitkinin ismi, fiyatı, tipi \(sebze mi meyve mi\), birimi \(sahaya fidan veya tohum olarak mı eklenicek\) ve hangi iklimin toprağında ekildiğini gösterir.
 
-#### **Saha İşlemleri**
+### **Saha İşlemleri**
 
 Saha ekleme, silme, güncelleme ve listeleme yapıldığı bölümdür. Bu bölümde var olan sahalarımız, fiyat \(kiralama veya satın alma\), saha tipi ve birimi \(metre kare, dönüm vs.\) vardır.
 
-#### **Saha Kapasite İşlemleri**
+### **Saha Kapasite İşlemleri**
 
 Saha kapasitesinin ekleme, silme, güncelleme ve listeleme işlemlerinin yapıldığı bölümdür. Burada seçilen sahada bitki türüne göre ne kadar tohum veya fidan eklenmesi gerektiğini gösterir.
 
-### **KİT**
+## **KİT**
 
 Sensor, eylem, eyleyici, kontrol gibi yapıları bünyesinde barındıran elektronik bir bileşendir. Pakete göre düzenlenmektedir. Her pakette bir veya daha fazla kit olabilir.
 
-#### Kit İşlemleri
+### Kit İşlemleri
 
 Sera için uygun sensor, eyleyici, kontrolör seçilip kitin oluşturulduğu kısımdır. Bu bölümde kit ekleme, güncelleme, silme ve listeleme işlemi yapılmaktadır. Listelenen kitlerin ismi, açıklma, sensorler, eyleyiciler ve kontrolör gösterilmektedir.
 
-#### Giriş İşlemleri
+### Giriş İşlemleri
 
 Seradan bilgi almak istediğimiz birimlerin ekleme, güncelleme, silme işlemlerinin yapıldığı bölümdür. Bu bölümde işlem yapılacak birimler sıcaklık, toprak nemi, gaz, hareket, su seviyesi ve nemdir.
 
-#### Eylem İşlemleri
+### Eylem İşlemleri
 
 Serada meydana yapılması istenen eylemlerin ekleme, güncelleme, silme işlemlerinin yapıldığı bölümdür. Serada yapılabilecek eylemlere örnek; alarm, sulama, fan çalıştırma.
 
-#### Sensor İşlemleri
+### Sensor İşlemleri
 
 Serada kullanılan sensorleri kullanıcını isteğine göre ekleme var olan sensorleri ise silme ve güncelleme işleminin yapılığı bölümdür. Listelenen sensorlerin isim, açıklama, fiyat, hangi verileri getirdiğini gösterilir.
 
-#### Eyleyici İşlemleri
+### Eyleyici İşlemleri
 
 Serada pakete belirtilen eylemlere göre gerçekleştiren bileşenlerin bulunduğu bölümdür. Bu bölümde eyleyici ekleme, silme, güncelleme ve listeleme işlemleri yapılır. Listelenen eyleyicilerin ismi, açıklama, fiyat, gerçekleştirdiği eylem belirtilmektedir.
 
-#### Kontrolör İşlemleri
+### Kontrolör İşlemleri
 
 Serada kullanılan kontrolör ekleme, silme, güncelleme ve listeleme işleminin yapıldığı kısımdır. Listelene kontrolörün isim, açıklama ve fiyat bilgisi verilmektedir.
 
