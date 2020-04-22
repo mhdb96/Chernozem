@@ -1,5 +1,8 @@
 ---
-description: IOT Smart Farming Platform
+description: >-
+  An Expert System for smart farming using IOT to provide the farmers with best
+  solutions and hardware with the ability to monitor the hardware remotely
+  through the website in real-time
 ---
 
 # Chernozem
