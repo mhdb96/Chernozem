@@ -20,7 +20,7 @@ description: IOT Smart Farming Platform
 
 An Expert System for smart farming which provides the farmers with best solutions and hardware matching their needs exactly, with the ability to monitor the hardware remotely through the website in real-time. The system offers: Admin login; to enter all the necessary data into the database and User login; which allows customers to buy the suggested hardware and monitor it.
 
-#### Technologies
+### Technologies
 
 * Laravel
 * JQuery
