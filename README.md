@@ -35,7 +35,7 @@ An Expert System for smart farming which provides the farmers with best solution
 
 ## Developers' Info
 
-* **Muhammed Bedavi** ~ [Linkedin🔗](https://www.linkedin.com/in/mhdb96/) - [GitHub🔗](https://github.com/mhdb96)
+* **Muhammed AKSOY** ~ [Linkedin🔗](https://www.linkedin.com/in/mhdb96/) - [GitHub🔗](https://github.com/mhdb96)
 * **Talha AYDIN** ~ [Linkedin🔗](https://www.linkedin.com/in/talha-aydin/) - [GitHub🔗](https://github.com/talhaaydn)
 * **Onur KANTAR** ~ [Linkedin🔗](https://www.linkedin.com/in/onur-kantar-580ab1ab/) - [GitHub🔗](https://github.com/simiyen)
 * **Ömer Resul Ertan** ~ [Linkedin🔗](https://www.linkedin.com/in/%C3%B6mer-resul-ertan-37ab33156/) - [GitHub🔗](https://github.com/Omerertan)
