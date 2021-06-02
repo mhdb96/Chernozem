@@ -59,7 +59,7 @@ class every5Second extends Command
 
         $gasLimit          = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/GasLimit')->getSnapshot()->getValue();
         $soilHumidityLimit = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/SoilHumidityLimit')->getSnapshot()->getValue();
-        $tempretureLimit   = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/TempretureLimit')->getSnapshot()->getValue();   
+        $tempretureLimit   = $firebase->getReference('2C-F4-32-5D-E5-75/Automation/TempretureLimit')->getSnapshot()->getValue();
 
 
         while (true) {
@@ -75,7 +75,7 @@ class every5Second extends Command
                 $this->createNotification($message, 'SoilHumidity');
             }
 
-            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue())['value'];            
+            $tempratureValue = last($firebase->getReference('2C-F4-32-5D-E5-75/Data/Tempreture')->getSnapshot()->getValue())['value'];
             if ($tempratureValue > $tempretureLimit) {
                 $message = "sıcaklık değeri olması gerekenden fazla olarak algılandı! Fan çalıştırıldı.";
                 $this->createNotification($message, 'Tempreture');
@@ -89,7 +89,7 @@ class every5Second extends Command
 
             sleep(30);
         }
-        
+
     }
 
     public function createNotification($notificationMessage, $inputType)
@@ -100,10 +100,12 @@ class every5Second extends Command
                 ['mac_adress', '=', '2C-F4-32-5D-E5-75'],
                 ['is_online', '=', '1'],
             ])->get()->first()->project_area_id; // get project_area id
-        $projectArea = DB::table('project_area')->where('id', $projectAreaKitId)->get()->first(); // get project_area        
-        $project = Project::find($projectArea->id)->get()->first(); // get project
-        $customer =  $project->customer; // get customer        
-        
+
+        $projectArea = DB::table('project_area')->where('id', $projectAreaKitId)->get()->first(); // get project_area
+//dd($projectArea->project_id);
+        $project = Project::where('id',$projectArea->project_id)->first(); // get project
+        $customer =  $project->customer; // get customer
+
         $notificationObject = new \stdClass();
         $notificationObject->customerName = $customer->first_name.' '.$customer->last_name;
         $notificationObject->customerId = $project->customer->id;
@@ -119,8 +121,8 @@ class every5Second extends Command
         if($lastOneHourNotificationCount == 0) {
             Notification::create([
                 'customer_id'  => $notificationObject->customerId,
-                'input_id'     => $inputId,  
-                'notification' => $notificationObject->message, 
+                'input_id'     => $inputId,
+                'notification' => $notificationObject->message,
             ]);
 
             Mail::to($customer->email)->send(new NotificationMail($notificationObject));

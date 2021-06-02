@@ -195,6 +195,7 @@ void setup() {
   connectToWifi(); 
 
   while(!getAutomation()){
+
   }
   
   if(!getSetters())
@@ -262,6 +263,7 @@ bool getAutomation()
 {
   String subAdress = MacAddress + "/Automation/";
   const ArduinoJson::JsonObject& automation = Firebase.get(subAdress).getJsonVariant().asObject();
+  automation.prettyPrintTo(Serial);
   if(automation["GasLimit"] == 0 || automation["SoilHumidityLimit"] == 0 || automation["TempretureLimit"] == 0)
   {
     return false;
